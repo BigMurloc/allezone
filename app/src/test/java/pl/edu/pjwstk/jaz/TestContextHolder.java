@@ -9,7 +9,6 @@ public class TestContextHolder implements TestExecutionListener {
         applicationContext.set(testContext.getApplicationContext());
     }
 
-
     public static <T> T getBean(Class<T> requiredType) {
         return applicationContext.get().getBean(requiredType);
     }
