@@ -11,7 +11,7 @@ import java.text.DecimalFormat;
 
 @RestController
 public class AverageController {
-    @GetMapping("average")
+    @GetMapping("/auth0/average")
     public AverageResult getAverage(@RequestParam(value = "numbers", required = false) String numbers){
         // numbers...
         //jesli brak argumentow
@@ -22,8 +22,8 @@ public class AverageController {
         //policz sume liczb
         double sum = 0;
         try {
-            for (int i = 0; i < numbersAsArray.length; i++) {
-                sum += Double.parseDouble(numbersAsArray[i]);
+            for (String s : numbersAsArray) {
+                sum += Double.parseDouble(s);
             }
         }
         //w razie zle podanych argumentow (np. litery)
