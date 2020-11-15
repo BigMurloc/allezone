@@ -5,28 +5,30 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
+//TODO find better way to compare sessionID
 @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 @Component
 public class UserSession {
 
-    private final UserDB userDB;
+    private String sessionID;
 
-    private List<User> userList;
+    private final UserDB userDB;
 
     public UserSession(UserDB userDB) {
         this.userDB = userDB;
-        userList = userDB.getListOfUsers();
     }
 
     public boolean isLoggedIn() {
-        for (User user : userList) {
-            if(user.isLoggedIn())
+        for (User user : userDB.getListOfUsers()) {
+            if(sessionID.equals(user.getUserSessionID())) {
                 return true;
+            }
         }
         return false;
     }
 
+    public void setSessionID(String sessionID) {
+        this.sessionID = sessionID;
+    }
 
 }

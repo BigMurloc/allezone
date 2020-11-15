@@ -1,6 +1,5 @@
 package pl.edu.pjwstk.jaz;
 
-import org.hibernate.criterion.Example;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,8 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
 
     private final AuthenticationService authenticationService;
-    public LoginController(AuthenticationService authenticationService, AppWebSecurityConfig appWebSecurityConfig) {
+    private final UserSession userSession;
+    public LoginController(AuthenticationService authenticationService, UserSession userSession) {
         this.authenticationService = authenticationService;
+        this.userSession = userSession;
     }
 
     @PostMapping("/auth0/login")
@@ -21,6 +22,7 @@ public class LoginController {
         if(!isLogged){
             throw new UnauthorizedException();
         }
+        userSession.setSessionID(loginRequest.getUsername()+loginRequest.getPassword());
     }
 
 }

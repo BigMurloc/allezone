@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.text.DecimalFormat;
+
+//TODO refactor
 
 @RestController
 public class AverageController {
@@ -28,7 +29,6 @@ public class AverageController {
         }
         //w razie zle podanych argumentow (np. litery)
         catch(NumberFormatException e){
-            System.out.println(e);
             return new AverageResult("Incorrect parameters.");
         }
         //srednia
