@@ -20,6 +20,7 @@ public class AuthenticationService {
             System.out.println(user.getUsername());
             if(username.equals(user.getUsername())
             && password.equals(user.getPassword())) {
+                user.setUserSessionID(user.getUsername()+user.getPassword());
                 return true;
             }
         }

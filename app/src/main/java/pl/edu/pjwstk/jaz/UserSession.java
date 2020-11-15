@@ -20,11 +20,15 @@ public class UserSession {
 
     public boolean isLoggedIn() {
         for (User user : userDB.getListOfUsers()) {
-            if(sessionID.equals(user.getUserSessionID())) {
+            if( sessionID != null && sessionID.equals(user.getUserSessionID())) {
                 return true;
             }
         }
         return false;
+    }
+
+    public String getSessionID() {
+        return sessionID;
     }
 
     public void setSessionID(String sessionID) {

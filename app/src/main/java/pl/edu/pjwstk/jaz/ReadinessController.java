@@ -12,12 +12,18 @@ public class ReadinessController {
     @PersistenceContext
     private EntityManager entityManager;
 
+    private final UserSession userSession;
+
+    public ReadinessController(UserSession userSession) {
+        this.userSession = userSession;
+    }
+
     @GetMapping("auth0/is-ready")
     @Transactional
-    public void readinessTest() {
+    public String readinessTest() {
         var entity = new Test1Entity();
         entity.setName("sdavsda");
-
         entityManager.persist(entity);
+        return userSession.getSessionID();
     }
 }
