@@ -6,6 +6,7 @@ import java.util.List;
 
 @Component
 public class UserDB {
+    //todo change to hashMap
     private User adminUser = new User("admin", "admin");
     private User exampleUser = new User("example", "kotek");
     private User moderatorUser = new User("moderator", "1234");

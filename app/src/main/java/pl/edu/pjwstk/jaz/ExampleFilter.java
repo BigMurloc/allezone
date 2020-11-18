@@ -28,6 +28,7 @@ public class ExampleFilter extends HttpFilter {
     }
 
     private boolean isSiteAllowed(HttpServletRequest request) {
+        //change
         if(request.getRequestURI().equals("/api/auth0/login")) {
             return true;
         }
