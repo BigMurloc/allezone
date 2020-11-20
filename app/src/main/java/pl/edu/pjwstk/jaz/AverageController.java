@@ -18,22 +18,28 @@ public class AverageController {
         if (numbers == null || numbers.equals(""))
             return new AverageResult("Please put parameters.");
 
+        double result;
         String[] numbersAsArray = numbers.split(",");
 
-        double sum = 0;
         try {
-            for (String s : numbersAsArray) {
-                sum += Double.parseDouble(s);
-            }
+            result = calculateAverage(numbersAsArray);
         }
         catch(NumberFormatException e){
             return new AverageResult("Incorrect parameters.");
         }
-        double result = sum / numbersAsArray.length;
+
         BigDecimal formattedResult = BigDecimal.valueOf(result);
         formattedResult = formattedResult.setScale(2, RoundingMode.HALF_UP);
-        String message = "Average equals: ";
-        message += formattedResult.stripTrailingZeros().toPlainString();
-        return new AverageResult(message);
+
+        return new AverageResult("Average equals: "+formattedResult.stripTrailingZeros().toPlainString());
     }
+
+    public double calculateAverage(String[] numbersAsArray){
+        double sum = 0;
+        for(String s : numbersAsArray){
+            sum += Double.parseDouble(s);
+        }
+        return sum/numbersAsArray.length;
+    }
+
 }
