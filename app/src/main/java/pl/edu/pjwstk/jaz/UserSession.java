@@ -9,7 +9,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserSession {
 
+    private boolean isLoggedIn = false;
+
     public boolean isLoggedIn() {
-        return false;
+        return isLoggedIn;
     }
+
+    public void logIn(){
+        isLoggedIn = true;
+    }
+
+    public void logOut(){
+        isLoggedIn = false;
+    }
+
 }

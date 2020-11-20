@@ -27,4 +27,12 @@ public class UserDB {
         System.out.println(users.size());
     }
 
+    public boolean compareUserCredentials(String username, String password){
+        for (Map.Entry<String, User> set : users.entrySet()) {
+            if(set.getKey().equals(username) && set.getValue().getPassword().equals(password))
+                return true;
+        }
+        return false;
+    }
+
 }

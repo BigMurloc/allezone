@@ -12,9 +12,8 @@ public class AuthenticationService {
         this.userDB = userDB;
     }
 
-
     public boolean login(String username, String password) {
-            return true;
+        return userDB.compareUserCredentials(username, password);
     }
 
 }
