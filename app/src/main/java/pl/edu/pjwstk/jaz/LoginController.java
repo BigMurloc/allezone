@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LoginController {
 
+    UserSession userSession;
+
     private final AuthenticationService authenticationService;
     public LoginController(AuthenticationService authenticationService, UserSession userSession) {
         this.authenticationService = authenticationService;
@@ -19,6 +21,7 @@ public class LoginController {
         if(!isLogged){
             throw new UnauthorizedException();
         }
+        userSession.logIn();
     }
 
 }
