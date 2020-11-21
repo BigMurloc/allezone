@@ -12,7 +12,7 @@ public class ReadinessController {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @GetMapping("auth0/is-ready")
+    @GetMapping("is-ready")
     @Transactional
     public void readinessTest() {
         var entity = new Test1Entity();

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuthenticationService {
 
+    User user;
     private final UserDB userDB;
 
     public AuthenticationService(UserDB userDB) {
@@ -13,7 +14,10 @@ public class AuthenticationService {
     }
 
     public boolean login(String username, String password) {
-        return userDB.compareUserCredentials(username, password);
+        user = userDB.findUser(username, password);
+        if(user != null)
+            return user.getPassword().equals(password);
+        return false;
     }
 
 }
