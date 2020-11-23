@@ -1,18 +1,18 @@
-package pl.edu.pjwstk.jaz;
+package pl.edu.pjwstk.jaz.endpoints.login;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import pl.edu.pjwstk.jaz.authentication.AuthenticationService;
+import pl.edu.pjwstk.jaz.exceptions.UnauthorizedException;
 
 @RestController
 public class LoginController {
 
-    private final UserSession userSession;
 
     private final AuthenticationService authenticationService;
-    public LoginController(AuthenticationService authenticationService, UserSession userSession) {
+    public LoginController(AuthenticationService authenticationService) {
         this.authenticationService = authenticationService;
-        this.userSession = userSession;
     }
 
     @PostMapping("/auth0/login")
@@ -21,7 +21,6 @@ public class LoginController {
         if(!isLogged){
             throw new UnauthorizedException();
         }
-        userSession.logIn();
     }
 
 }

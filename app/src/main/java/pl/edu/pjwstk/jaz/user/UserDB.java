@@ -1,26 +1,30 @@
-package pl.edu.pjwstk.jaz;
+package pl.edu.pjwstk.jaz.user;
 
-import liquibase.pro.packaged.U;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-//todo napisac testy do klas
 @Component
 public class UserDB {
-    private User admin = new User("admin", "admin");
+    private User admin;
     private User example = new User("example", "kotek");
     private User moderator = new User("moderator", "1234");
     private HashMap<String, User> users = new HashMap<>();
 
     public UserDB() {
+        Set<String> adminAuthority = new HashSet<>();
+        adminAuthority.add("admin"); //
+        admin = new User("admin", "admin", adminAuthority);
         this.users.put(admin.getUsername(), admin);
         this.users.put(example.getUsername(), example);
         this.users.put(moderator.getUsername(), moderator);
-        for (int i = 0; i < 10000000; i++) {
+        simulateLargeUserDB();
+    }
+
+    private void simulateLargeUserDB() {
+        for (int i = 0; i < 10_000_000; i++) {
             String s = Long.toString(i);
-            User user = new User(s,s);
+            User user = new User(s,s, Collections.emptySet());
             this.users.put(user.getUsername(), user);
         }
     }
@@ -30,8 +34,8 @@ public class UserDB {
         System.out.println(users.size());
     }
 
-    public User findUser(String username, String password) {
-        if(users.containsKey(username))
+    public User getUser(String username) {
+        if(users.containsKey(username)) // 0,02ms
             return users.get(username);
         return null;
     }
