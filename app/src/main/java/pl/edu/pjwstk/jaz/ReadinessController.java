@@ -1,4 +1,4 @@
-package pl.edu.pjwstk.jaz.endpoints.readiness;
+package pl.edu.pjwstk.jaz;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -17,7 +17,6 @@ public class ReadinessController {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @PreAuthorize("hasAnyAuthority('view-readiness')")
     @GetMapping("/auth0/is-ready")
     @Transactional
     public void readinessTest() {

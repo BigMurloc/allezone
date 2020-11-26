@@ -1,4 +1,4 @@
-package pl.edu.pjwstk.jaz.exceptions;
+package pl.edu.pjwstk.jaz;
 
 public class UnauthorizedException extends Throwable {
 

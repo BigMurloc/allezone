@@ -13,7 +13,10 @@ public class AppWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapte
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/auth0/**").permitAll()
+                .antMatchers("/login", "/register", "/auth0/**").permitAll()
+//                .anyRequest().authenticated()
+                .anyRequest().permitAll()
                 .and().csrf().disable();
+
     }
 }

@@ -1,12 +1,11 @@
-package pl.edu.pjwstk.jaz.authentication;
+package pl.edu.pjwstk.jaz;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import pl.edu.pjwstk.jaz.user.User;
+import pl.edu.pjwstk.jaz.User;
 
-import java.util.Collection;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class AppAuthentication extends AbstractAuthenticationToken {

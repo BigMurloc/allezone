@@ -1,5 +1,6 @@
-package pl.edu.pjwstk.jaz.endpoints.average;
+package pl.edu.pjwstk.jaz;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,7 +12,7 @@ import java.math.RoundingMode;
 @RestController
 public class AverageController {
 
-    @GetMapping("/auth0/average")
+    @GetMapping("average")
     public AverageResult getAverage(@RequestParam(value = "numbers", required = false) String numbers){
 
         if (numbers == null || numbers.equals(""))

@@ -1,4 +1,4 @@
-package pl.edu.pjwstk.jaz.endpoints.average;
+package pl.edu.pjwstk.jaz;
 
 public class AverageResult {
 

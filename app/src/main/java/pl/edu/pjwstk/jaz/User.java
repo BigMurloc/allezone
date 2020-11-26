@@ -1,4 +1,4 @@
-package pl.edu.pjwstk.jaz.user;
+package pl.edu.pjwstk.jaz;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -35,4 +35,5 @@ public class User {
     public void addAuthority(String authority){
         this.authorities.add(authority);
     }
+
 }

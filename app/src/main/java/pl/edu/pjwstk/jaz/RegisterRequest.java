@@ -1,4 +1,4 @@
-package pl.edu.pjwstk.jaz.endpoints.register;
+package pl.edu.pjwstk.jaz;
 
 public class RegisterRequest {
 
@@ -11,5 +11,10 @@ public class RegisterRequest {
 
     public String getPassword() {
         return password;
+    }
+
+    public RegisterRequest(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 }

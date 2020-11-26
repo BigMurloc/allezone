@@ -1,6 +1,7 @@
 package pl.edu.pjwstk.jaz;
 
 import org.springframework.http.HttpStatus;
+
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpFilter;
@@ -26,11 +27,7 @@ public class ExampleFilter extends HttpFilter {
     }
 
     private boolean isSiteAllowed(HttpServletRequest request) {
-        //change
-        if(request.getRequestURI().equals("/api/auth0/login")) {
-            return true;
-        }
-        return request.getRequestURI().equals("/api/auth0/register");
+        return request.getRequestURI().equals("/api/auth0/login");
     }
 
     private boolean isUserLogged() {

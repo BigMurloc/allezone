@@ -1,4 +1,4 @@
-package pl.edu.pjwstk.jaz.endpoints.grantAuthority;
+package pl.edu.pjwstk.jaz;
 
 public class AuthorityRequest {
 

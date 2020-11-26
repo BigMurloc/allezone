@@ -1,4 +1,4 @@
-package pl.edu.pjwstk.jaz.user;
+package pl.edu.pjwstk.jaz;
 
 import org.springframework.stereotype.Component;
 
@@ -22,14 +22,15 @@ public class UserDB {
     }
 
     private void simulateLargeUserDB() {
-        for (int i = 0; i < 10_000_000; i++) {
+        for (int i = 0; i < 10_000; i++) {
             String s = Long.toString(i);
             User user = new User(s,s, Collections.emptySet());
             this.users.put(user.getUsername(), user);
         }
     }
 
-    public void addUser(User user){
+    public void addUser(String username, String password){
+        User user = new User(username, password);
         users.put(user.getUsername(), user);
         System.out.println(users.size());
     }
