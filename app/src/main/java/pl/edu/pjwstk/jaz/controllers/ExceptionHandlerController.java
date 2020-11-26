@@ -1,6 +1,5 @@
 package pl.edu.pjwstk.jaz.controllers;
 
-import org.apache.coyote.Response;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +25,7 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
                 request);
     }
 
-    @ExceptionHandler(value = UserAlreadyExistsException.class)
+    @ExceptionHandler(value = UnauthorizedException.class)
     protected ResponseEntity<Object> handleUnauthorizedException(RuntimeException exception, WebRequest request) {
         String bodyOfResponse = "Incorrect username or password";
         return handleExceptionInternal(
