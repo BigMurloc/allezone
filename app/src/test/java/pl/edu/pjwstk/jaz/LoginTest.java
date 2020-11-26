@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.client.HttpStatusCodeException;
+import pl.edu.pjwstk.jaz.requests.LoginRequest;
 
 
 import static io.restassured.RestAssured.given;

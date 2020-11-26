@@ -1,4 +1,4 @@
-package pl.edu.pjwstk.jaz;
+package pl.edu.pjwstk.jaz.exceptions;
 
 public class UserAlreadyExistsException extends Throwable {
 }

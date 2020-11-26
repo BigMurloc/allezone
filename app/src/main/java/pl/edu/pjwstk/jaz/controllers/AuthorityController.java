@@ -1,9 +1,12 @@
-package pl.edu.pjwstk.jaz;
+package pl.edu.pjwstk.jaz.controllers;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import pl.edu.pjwstk.jaz.requests.AuthorityRequest;
+import pl.edu.pjwstk.jaz.User;
+import pl.edu.pjwstk.jaz.UserDB;
 
 @RestController
 public class AuthorityController {

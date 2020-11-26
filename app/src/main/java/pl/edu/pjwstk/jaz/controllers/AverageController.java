@@ -1,9 +1,10 @@
-package pl.edu.pjwstk.jaz;
+package pl.edu.pjwstk.jaz.controllers;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import pl.edu.pjwstk.jaz.AverageResult;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

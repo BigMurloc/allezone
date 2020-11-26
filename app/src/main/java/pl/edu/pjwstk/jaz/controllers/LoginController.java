@@ -1,9 +1,12 @@
-package pl.edu.pjwstk.jaz;
+package pl.edu.pjwstk.jaz.controllers;
 
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import pl.edu.pjwstk.jaz.AuthenticationService;
+import pl.edu.pjwstk.jaz.FilterAuthenthicationService;
+import pl.edu.pjwstk.jaz.requests.LoginRequest;
+import pl.edu.pjwstk.jaz.exceptions.UnauthorizedException;
 
 @RestController
 public class LoginController {
