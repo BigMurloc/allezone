@@ -26,17 +26,67 @@ public class LoginTest {
     }
 
     @Test
-    public void when_incorrect_credentials_should_not_login_with_status_code_500_INTERNAL_SERVER_ERROR(){
+    public void when_incorrect_credentials_should_not_login_with_status_code_409_CONFLICT(){
         given()
             .when()
                 .body(new LoginRequest(":XO:", ":XO:"))
                 .contentType(ContentType.JSON)
                 .post("/api/login")
             .then()
-                .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+                .statusCode(HttpStatus.CONFLICT.value());
+    }
+    @Test
+    public void when_correct_credentials_should_give_access_to_average_endpoint(){
+        var response = given()
+                .when()
+                .body(new LoginRequest("admin", "admin"))
+                .contentType(ContentType.JSON)
+                .post("/api/login")
+                .thenReturn();
+
+        given()
+                .cookies(response.getCookies())
+                .get("/api/average")
+        .then()
+                .statusCode(HttpStatus.OK.value());
+    }
+    //AUTH0
+
+    @Test
+    public void AUTH0_when_correct_credentials_should_login_successfully_with_status_code_400_BAD_REQUEST(){
+        given()
+                .when()
+                .body(new LoginRequest("admin", "admin"))
+                .contentType(ContentType.JSON)
+                .post("/api/auth0/login")
+                .then()
+                .statusCode(HttpStatus.BAD_REQUEST.value());
     }
 
+    @Test
+    public void AUTH0_when_incorrect_credentials_should_not_login_with_status_code_409_CONFLICT(){
+        given()
+                .when()
+                .body(new LoginRequest(":XO:", ":XO:"))
+                .contentType(ContentType.JSON)
+                .post("/api/auth0/login")
+                .then()
+                .statusCode(HttpStatus.CONFLICT.value());
+    }
+    @Test
+    public void AUTHO_when_correct_credentials_should_give_access_to_readiness_endpoint(){
+        var response = given()
+                .when()
+                .body(new LoginRequest("admin", "admin"))
+                .contentType(ContentType.JSON)
+                .post("/api/auth0/login")
+                .thenReturn();
 
-
+        given()
+                .cookies(response.getCookies())
+                .get("/api/auth0/is-ready")
+                .then()
+                .statusCode(HttpStatus.OK.value());
+    }
 
 }
