@@ -8,6 +8,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import pl.edu.pjwstk.jaz.requests.RegisterRequest;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 
 @RunWith(SpringRunner.class)
 @IntegrationTest
@@ -27,12 +28,14 @@ public class RegisterTest {
     @Test
     public void when_user_already_exists_throw_exception_with_status_code_409_CONFLICT(){
         given()
-                .when()
-                .body(new RegisterRequest("admin", "admin"))
-                .contentType(ContentType.JSON)
-                .post("/api/register")
+            .when()
+            .body(new RegisterRequest("admin", "admin"))
+            .contentType(ContentType.JSON)
+            .post("/api/register")
         .then()
-                .statusCode(HttpStatus.CONFLICT.value());
+            .statusCode(HttpStatus.CONFLICT.value())
+        .and()
+            .content(equalTo("User already exists"));
     }
 
 }

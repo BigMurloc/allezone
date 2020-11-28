@@ -7,6 +7,8 @@ import pl.edu.pjwstk.jaz.requests.RegisterRequest;
 import pl.edu.pjwstk.jaz.exceptions.UserAlreadyExistsException;
 import pl.edu.pjwstk.jaz.UserDB;
 
+import java.util.InputMismatchException;
+
 @RestController
 public class RegisterController {
 

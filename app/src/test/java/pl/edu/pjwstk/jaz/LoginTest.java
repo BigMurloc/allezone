@@ -9,6 +9,7 @@ import pl.edu.pjwstk.jaz.requests.LoginRequest;
 
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 
 @RunWith(SpringRunner.class)
 @IntegrationTest
@@ -33,10 +34,35 @@ public class LoginTest {
                 .contentType(ContentType.JSON)
                 .post("/api/login")
             .then()
+                .statusCode(HttpStatus.CONFLICT.value())
+            .and()
+                .content(equalTo("Incorrect username or password"));
+    }
+
+    @Test
+    public void when_incorrect_password_should_not_login_with_status_code_409_CONFLICT(){
+        given()
+            .when()
+                .body(new LoginRequest("admin", "wrongPassword"))
+                .contentType(ContentType.JSON)
+                .post("api/login")
+            .then()
                 .statusCode(HttpStatus.CONFLICT.value());
     }
+
     @Test
-    public void when_correct_credentials_should_give_access_to_average_endpoint(){
+    public void when_incorrect_username_should_not_login_with_status_code_409_CONFLICT(){
+        given()
+                .when()
+                .body(new LoginRequest(":O:O", "admin"))
+                .contentType(ContentType.JSON)
+                .post("api/login")
+                .then()
+                .statusCode(HttpStatus.CONFLICT.value());
+    }
+
+    @Test
+    public void when_correct_credentials_should_give_access_to_average_endpoint_with_status_code_200_OK(){
         var response = given()
                 .when()
                 .body(new LoginRequest("admin", "admin"))
@@ -70,6 +96,27 @@ public class LoginTest {
                 .body(new LoginRequest(":XO:", ":XO:"))
                 .contentType(ContentType.JSON)
                 .post("/api/auth0/login")
+                .then()
+                .statusCode(HttpStatus.CONFLICT.value());
+    }
+    @Test
+    public void AUTH0when_incorrect_password_should_not_login_with_status_code_409_CONFLICT(){
+        given()
+                .when()
+                .body(new LoginRequest("admin", "wrongPassword"))
+                .contentType(ContentType.JSON)
+                .post("api/auth0/login")
+                .then()
+                .statusCode(HttpStatus.CONFLICT.value());
+    }
+
+    @Test
+    public void AUTH0when_incorrect_username_should_not_login_with_status_code_409_CONFLICT(){
+        given()
+                .when()
+                .body(new LoginRequest(":O:O", "admin"))
+                .contentType(ContentType.JSON)
+                .post("api/auth0/login")
                 .then()
                 .statusCode(HttpStatus.CONFLICT.value());
     }
