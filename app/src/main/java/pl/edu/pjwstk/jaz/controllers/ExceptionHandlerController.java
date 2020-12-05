@@ -27,7 +27,7 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = UnauthorizedException.class)
     protected ResponseEntity<Object> handleUnauthorizedException(RuntimeException exception, WebRequest request) {
-        String bodyOfResponse = "Incorrect username or password";
+        String bodyOfResponse = "";
         return handleExceptionInternal(
                 exception,
                 bodyOfResponse,

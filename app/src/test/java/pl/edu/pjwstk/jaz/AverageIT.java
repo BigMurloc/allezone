@@ -3,11 +3,13 @@ package pl.edu.pjwstk.jaz;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringRunner;
 import pl.edu.pjwstk.jaz.requests.LoginRequest;
+import pl.edu.pjwstk.jaz.requests.RegisterRequest;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
@@ -16,14 +18,19 @@ import static org.hamcrest.Matchers.equalTo;
 @IntegrationTest
 public class AverageIT {
 
-    Response authorizedUserResponse;
+    private Response authorizedUserResponse;
 
     @Before
     public void initialize(){
+        given()
+            .when()
+                .body(new RegisterRequest("nowy", "nowy"))
+                .contentType(ContentType.JSON)
+                .post("/api/register");
         authorizedUserResponse =
         given()
             .when()
-                .body(new LoginRequest("admin", "admin"))
+                .body(new LoginRequest("nowy", "nowy"))
                 .contentType(ContentType.JSON)
                 .post("/api/login")
             .thenReturn();
@@ -52,6 +59,8 @@ public class AverageIT {
         // @formatter:off
         given()
                 .cookies(authorizedUserResponse.getCookies())
+        .when()
+                .contentType(ContentType.JSON)
                 .get("/api/average")
         .then()
                 .body("message", equalTo("Please put parameters."));

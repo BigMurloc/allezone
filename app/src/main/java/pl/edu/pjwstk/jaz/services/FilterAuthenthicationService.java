@@ -1,6 +1,9 @@
-package pl.edu.pjwstk.jaz;
+package pl.edu.pjwstk.jaz.services;
 
 import org.springframework.stereotype.Component;
+import pl.edu.pjwstk.jaz.User;
+import pl.edu.pjwstk.jaz.UserDB;
+import pl.edu.pjwstk.jaz.UserSession;
 
 
 @Component

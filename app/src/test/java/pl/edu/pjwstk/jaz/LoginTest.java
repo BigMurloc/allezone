@@ -34,9 +34,7 @@ public class LoginTest {
                 .contentType(ContentType.JSON)
                 .post("/api/login")
             .then()
-                .statusCode(HttpStatus.CONFLICT.value())
-            .and()
-                .content(equalTo("Incorrect username or password"));
+                .statusCode(HttpStatus.CONFLICT.value());
     }
 
     @Test
@@ -76,8 +74,8 @@ public class LoginTest {
         .then()
                 .statusCode(HttpStatus.OK.value());
     }
-    //AUTH0
 
+    //AUTH0
     @Test
     public void AUTH0_when_correct_credentials_should_login_successfully_with_status_code_400_BAD_REQUEST(){
         given()

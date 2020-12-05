@@ -2,12 +2,13 @@ package pl.edu.pjwstk.jaz;
 
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 @Component
 public class UserDB {
     private User admin;
-    private User example = new User("example", "kotek");
+    private User example = new User("user", "user");
     private User moderator = new User("moderator", "1234");
     private HashMap<String, User> users = new HashMap<>();
 
@@ -36,7 +37,7 @@ public class UserDB {
     }
 
     public User getUser(String username) {
-        if(users.containsKey(username)) // 0,02ms
+        if(users.containsKey(username))
             return users.get(username);
         return null;
     }
