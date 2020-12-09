@@ -2,7 +2,7 @@ package pl.edu.pjwstk.jaz;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import org.junit.Before;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,7 +11,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import pl.edu.pjwstk.jaz.requests.AuthorityRequest;
 import pl.edu.pjwstk.jaz.requests.LoginRequest;
 import pl.edu.pjwstk.jaz.requests.RegisterRequest;
-
 import static io.restassured.RestAssured.given;
 
 @RunWith(SpringRunner.class)
@@ -47,6 +46,18 @@ public class GrantAuthorityTest {
                 .thenReturn();
     }
 
+    @AfterClass
+    public static void afterClass(){
+        given()
+                .cookies(adminResponse.getCookies())
+                .contentType(ContentType.JSON)
+                .post("/api/deleteUser/moderator");
+        given()
+                .cookies(adminResponse.getCookies())
+                .contentType(ContentType.JSON)
+                .post("/api/deleteUser/user");
+
+    }
     @Test
     public void admin_user_should_have_access_to_grant_authority_with_status_code_200_OK(){
         given()
@@ -96,7 +107,7 @@ public class GrantAuthorityTest {
 
         given()
             .cookies(moderatorResponse.getCookies())
-            .body(new AuthorityRequest("user", "admin"))
+            .body(new AuthorityRequest("user", "test"))
             .contentType(ContentType.JSON)
             .post("/api/grant-authority")
         .then()

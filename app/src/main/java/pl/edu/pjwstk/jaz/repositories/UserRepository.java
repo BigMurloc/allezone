@@ -49,4 +49,12 @@ public class UserRepository {
                 .setParameter("username", username)
                 .executeUpdate();
     }
+
+    @Transactional
+    public void revokeAuthority(AuthorityRequest authorityRequest) {
+        UserEntity userEntity = findUserByUsername(authorityRequest.getUsername());
+        Set<String> authorities = userEntity.getAuthorities();
+        authorities.remove(authorityRequest.getAuthority());
+        entityManager.persist(userEntity);
+    }
 }

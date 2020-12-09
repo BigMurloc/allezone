@@ -1,12 +1,13 @@
 package pl.edu.pjwstk.jaz.entities;
 
-import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.*;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.id.enhanced.SequenceStyleGenerator;
 import org.springframework.data.repository.query.Param;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,6 +15,7 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 @SequenceGenerator(name = "user_id_sequence", initialValue = 2)
+@OnDelete(action = OnDeleteAction.CASCADE)
 public class UserEntity {
 //todo proper authorities
     @Id
@@ -25,6 +27,8 @@ public class UserEntity {
     @ElementCollection
     @CollectionTable(name = "authorities", joinColumns = @JoinColumn(name = "id"))
     @Column(name = "authorities")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "users", referencedColumnName = "id")
     private Set<String> authorities = new HashSet<>();
     private String firstName;
     private String lastName;
