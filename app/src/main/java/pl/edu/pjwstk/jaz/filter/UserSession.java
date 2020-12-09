@@ -19,8 +19,4 @@ public class UserSession {
         isLoggedIn = true;
     }
 
-    public void logOut(){
-        isLoggedIn = false;
-    }
-
 }

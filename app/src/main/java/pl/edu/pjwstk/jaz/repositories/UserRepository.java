@@ -33,7 +33,7 @@ public class UserRepository {
     @Transactional
     public void grantAuthority(AuthorityRequest authorityRequest){
         UserEntity userEntity = findUserByUsername(authorityRequest.getUsername());
-        Set<String> authorities = userEntity.getAuthorities();
+        Set<String> authorities = userEntity.getAuthority();
         authorities.add(authorityRequest.getAuthority());
         entityManager.persist(userEntity);
     }
@@ -50,7 +50,7 @@ public class UserRepository {
     @Transactional
     public void revokeAuthority(AuthorityRequest authorityRequest) {
         UserEntity userEntity = findUserByUsername(authorityRequest.getUsername());
-        Set<String> authorities = userEntity.getAuthorities();
+        Set<String> authorities = userEntity.getAuthority();
         authorities.remove(authorityRequest.getAuthority());
         entityManager.persist(userEntity);
     }

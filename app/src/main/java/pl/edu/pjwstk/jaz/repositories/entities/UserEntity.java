@@ -1,6 +1,7 @@
 package pl.edu.pjwstk.jaz.repositories.entities;
 
 import org.hibernate.annotations.*;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
@@ -8,25 +9,26 @@ import javax.persistence.Table;
 import java.util.HashSet;
 import java.util.Set;
 
-// keep it simple
 @Entity
-@Table(name = "users")
-@SequenceGenerator(name = "user_id_sequence", initialValue = 2)
-@OnDelete(action = OnDeleteAction.CASCADE)
+@Table(name = "app_user")
+@Component("test")
 public class UserEntity {
-//todo proper authorities
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_sequence")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(unique = true)
     private String username;
     private String password;
+
     @ElementCollection
-    @CollectionTable(name = "authorities", joinColumns = @JoinColumn(name = "id"))
-    @Column(name = "authorities")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "users", referencedColumnName = "id")
-    private Set<String> authorities = new HashSet<>();
+    @CollectionTable(
+            name = "app_user_authority",
+            joinColumns = {
+                    @JoinColumn(name = "app_user_id")
+            }
+    )
+    @Column(name = "authority")
+    private Set<String> authority = new HashSet<>();
     private String firstName;
     private String lastName;
     private String phoneNumber;
@@ -97,11 +99,11 @@ public class UserEntity {
         return id;
     }
 
-    public Set<String> getAuthorities() {
-        return authorities;
+    public Set<String> getAuthority() {
+        return authority;
     }
 
-    public void setAuthorities(Set<String> authorities) {
-        this.authorities = authorities;
+    public void setAuthority(Set<String> authorities) {
+        this.authority = authorities;
     }
 }

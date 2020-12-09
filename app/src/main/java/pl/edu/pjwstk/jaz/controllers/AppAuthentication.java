@@ -13,7 +13,7 @@ public class AppAuthentication extends AbstractAuthenticationToken {
     private final UserEntity authenticatedUser;
 
     public AppAuthentication(UserEntity authenticatedUser) {
-        super(toGrantedAuthorities(authenticatedUser.getAuthorities()));
+        super(toGrantedAuthorities(authenticatedUser.getAuthority()));
         this.authenticatedUser = authenticatedUser;
         setAuthenticated(true);
     }

@@ -1,6 +1,6 @@
 DROP TABLE test1;
 
-CREATE TABLE users(
+CREATE TABLE app_user(
     id BIGSERIAL NOT NULL PRIMARY KEY,
     username VARCHAR (255) UNIQUE,
     password VARCHAR (255),
