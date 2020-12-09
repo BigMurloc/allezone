@@ -4,6 +4,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import pl.edu.pjwstk.jaz.entities.UserEntity;
+import pl.edu.pjwstk.jaz.exceptions.UserAlreadyExistsException;
 import pl.edu.pjwstk.jaz.requests.AuthorityRequest;
 import pl.edu.pjwstk.jaz.requests.RegisterRequest;
 
@@ -22,12 +23,7 @@ public class UserRepository {
     }
 
     @Transactional
-    public void saveUser(RegisterRequest registerRequest){
-        var userEntity = new UserEntity();
-        userEntity.setUsername(registerRequest.getUsername());
-        var encodedPassword = passwordEncoder.encode(registerRequest.getPassword());
-        userEntity.setPassword(encodedPassword);
-        userEntity.setAuthorities(new HashSet<>());
+    public void saveUser(UserEntity userEntity) throws UserAlreadyExistsException {
         entityManager.persist(userEntity);
     }
 

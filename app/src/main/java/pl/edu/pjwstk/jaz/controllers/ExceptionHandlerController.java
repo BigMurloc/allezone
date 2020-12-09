@@ -1,5 +1,6 @@
 package pl.edu.pjwstk.jaz.controllers;
 
+import org.postgresql.util.PSQLException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,7 @@ import pl.edu.pjwstk.jaz.exceptions.UserAlreadyExistsException;
 public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
 
 
-    @ExceptionHandler(value = UserAlreadyExistsException.class)
+    @ExceptionHandler(value = PSQLException.class)
     protected ResponseEntity<Object> handleUserAlreadyExistsException(RuntimeException exception, WebRequest request) {
         String bodyOfResponse = "User already exists";
         return handleExceptionInternal(

@@ -19,6 +19,7 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_sequence")
     private Long id;
+    @Column(unique = true)
     private String username;
     private String password;
     @ElementCollection
