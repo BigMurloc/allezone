@@ -1,5 +1,7 @@
 package pl.edu.pjwstk.jaz.controllers;
 
+import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
+import org.hibernate.exception.ConstraintViolationException;
 import org.postgresql.util.PSQLException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -15,7 +17,7 @@ import pl.edu.pjwstk.jaz.exceptions.UserAlreadyExistsException;
 public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
 
 
-    @ExceptionHandler(value = PSQLException.class)
+    @ExceptionHandler(value = ConstraintViolationException.class)
     protected ResponseEntity<Object> handleUserAlreadyExistsException(RuntimeException exception, WebRequest request) {
         String bodyOfResponse = "User already exists";
         return handleExceptionInternal(
