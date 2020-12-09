@@ -13,6 +13,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import pl.edu.pjwstk.jaz.exceptions.UnauthorizedException;
 import pl.edu.pjwstk.jaz.exceptions.UserAlreadyExistsException;
 
+import javax.persistence.NoResultException;
+
 @ControllerAdvice
 public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
 
@@ -20,6 +22,17 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = ConstraintViolationException.class)
     protected ResponseEntity<Object> handleUserAlreadyExistsException(RuntimeException exception, WebRequest request) {
         String bodyOfResponse = "User already exists";
+        return handleExceptionInternal(
+                exception,
+                bodyOfResponse,
+                new HttpHeaders(),
+                HttpStatus.CONFLICT,
+                request);
+    }
+
+    @ExceptionHandler(value = NoResultException.class)
+    protected ResponseEntity<Object> handleNoResultException(RuntimeException exception, WebRequest request) {
+        String bodyOfResponse = "User does not exist";
         return handleExceptionInternal(
                 exception,
                 bodyOfResponse,

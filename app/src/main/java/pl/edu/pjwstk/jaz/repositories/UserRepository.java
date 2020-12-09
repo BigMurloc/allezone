@@ -23,7 +23,7 @@ public class UserRepository {
     }
 
     @Transactional
-    public void saveUser(UserEntity userEntity) throws UserAlreadyExistsException {
+    public void saveUser(UserEntity userEntity) {
         entityManager.persist(userEntity);
     }
 

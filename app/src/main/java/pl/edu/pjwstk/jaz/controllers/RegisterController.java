@@ -25,7 +25,7 @@ public class RegisterController {
     }
 
     @PostMapping("/register")
-    public void register(@RequestBody RegisterRequest registerRequest) throws UserAlreadyExistsException {
+    public void register(@RequestBody RegisterRequest registerRequest) {
         UserEntity userEntity = createUserEntity(registerRequest);
         userRepository.saveUser(userEntity);
     }
