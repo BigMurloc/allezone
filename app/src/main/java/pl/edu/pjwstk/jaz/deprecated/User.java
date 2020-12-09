@@ -1,4 +1,4 @@
-package pl.edu.pjwstk.jaz;
+package pl.edu.pjwstk.jaz.deprecated;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -49,14 +49,14 @@ public class LoginTest {
     }
 
     @Test
-    public void when_incorrect_username_should_not_login_with_status_code_409_CONFLICT(){
+    public void when_incorrect_username_should_not_login_with_status_code_500(){
         given()
                 .when()
                 .body(new LoginRequest(":O:O", "admin"))
                 .contentType(ContentType.JSON)
                 .post("api/login")
                 .then()
-                .statusCode(HttpStatus.CONFLICT.value());
+                .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
     }
 
     @Test

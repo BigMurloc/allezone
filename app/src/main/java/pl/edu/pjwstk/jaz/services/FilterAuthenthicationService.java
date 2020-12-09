@@ -1,9 +1,9 @@
 package pl.edu.pjwstk.jaz.services;
 
 import org.springframework.stereotype.Component;
-import pl.edu.pjwstk.jaz.User;
-import pl.edu.pjwstk.jaz.UserDB;
-import pl.edu.pjwstk.jaz.UserSession;
+import pl.edu.pjwstk.jaz.deprecated.User;
+import pl.edu.pjwstk.jaz.deprecated.UserDB;
+import pl.edu.pjwstk.jaz.filter.UserSession;
 
 
 @Component

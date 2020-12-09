@@ -1,16 +1,43 @@
 package pl.edu.pjwstk.jaz.entities;
 
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+import org.hibernate.id.enhanced.SequenceStyleGenerator;
+import org.springframework.data.repository.query.Param;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
 // keep it simple
 @Entity
 @Table(name = "users")
+@SequenceGenerator(name = "user_id_sequence", initialValue = 2)
 public class UserEntity {
-
+//todo proper authorities
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_sequence")
     private Long id;
     private String username;
     private String password;
+    @ElementCollection
+    @CollectionTable(name = "authorities", joinColumns = @JoinColumn(name = "id"))
+    @Column(name = "authorities")
+    private Set<String> authorities = new HashSet<>();
+    private String firstName;
+    private String lastName;
+    private String phoneNumber;
+    @Column(unique = true)
+    private String pesel;
+
+    public UserEntity() {
+    }
+
+    public UserEntity(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
     public String getUsername() {
         return username;
@@ -28,13 +55,51 @@ public class UserEntity {
         this.password = password;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
 
-    public Long getId() {
-        return id;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getPesel() {
+        return pesel;
+    }
+
+    public void setPesel(String pesel) {
+        this.pesel = pesel;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public Set<String> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Set<String> authorities) {
+        this.authorities = authorities;
+    }
 }
