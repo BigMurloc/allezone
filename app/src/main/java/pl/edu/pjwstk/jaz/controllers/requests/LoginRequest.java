@@ -1,4 +1,4 @@
-package pl.edu.pjwstk.jaz.requests;
+package pl.edu.pjwstk.jaz.controllers.requests;
 
 public class LoginRequest {
 

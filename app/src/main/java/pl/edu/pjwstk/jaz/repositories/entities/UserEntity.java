@@ -1,9 +1,6 @@
-package pl.edu.pjwstk.jaz.entities;
+package pl.edu.pjwstk.jaz.repositories.entities;
 
 import org.hibernate.annotations.*;
-import org.hibernate.annotations.Parameter;
-import org.hibernate.id.enhanced.SequenceStyleGenerator;
-import org.springframework.data.repository.query.Param;
 
 import javax.persistence.*;
 import javax.persistence.Entity;

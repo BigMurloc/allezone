@@ -5,11 +5,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import pl.edu.pjwstk.jaz.deprecated.User;
-import pl.edu.pjwstk.jaz.entities.UserEntity;
+import pl.edu.pjwstk.jaz.repositories.entities.UserEntity;
 import pl.edu.pjwstk.jaz.repositories.UserRepository;
-import pl.edu.pjwstk.jaz.requests.RegisterRequest;
-import pl.edu.pjwstk.jaz.exceptions.UserAlreadyExistsException;
+import pl.edu.pjwstk.jaz.controllers.requests.RegisterRequest;
 import pl.edu.pjwstk.jaz.deprecated.UserDB;
 
 @RestController

@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.edu.pjwstk.jaz.entities.Test1Entity;
+import pl.edu.pjwstk.jaz.repositories.entities.Test1Entity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

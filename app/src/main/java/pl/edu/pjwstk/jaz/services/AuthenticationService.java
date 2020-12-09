@@ -4,9 +4,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import pl.edu.pjwstk.jaz.*;
+import pl.edu.pjwstk.jaz.controllers.AppAuthentication;
 import pl.edu.pjwstk.jaz.deprecated.UserDB;
-import pl.edu.pjwstk.jaz.entities.UserEntity;
+import pl.edu.pjwstk.jaz.repositories.entities.UserEntity;
 import pl.edu.pjwstk.jaz.repositories.UserRepository;
 
 

@@ -1,4 +1,4 @@
-package pl.edu.pjwstk.jaz.entities;
+package pl.edu.pjwstk.jaz.repositories.entities;
 
 import javax.persistence.*;
 

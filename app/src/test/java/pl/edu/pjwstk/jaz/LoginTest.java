@@ -5,11 +5,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringRunner;
-import pl.edu.pjwstk.jaz.requests.LoginRequest;
+import pl.edu.pjwstk.jaz.controllers.requests.LoginRequest;
 
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
 
 @RunWith(SpringRunner.class)
 @IntegrationTest

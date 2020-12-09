@@ -8,9 +8,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringRunner;
-import pl.edu.pjwstk.jaz.requests.AuthorityRequest;
-import pl.edu.pjwstk.jaz.requests.LoginRequest;
-import pl.edu.pjwstk.jaz.requests.RegisterRequest;
+import pl.edu.pjwstk.jaz.controllers.requests.AuthorityRequest;
+import pl.edu.pjwstk.jaz.controllers.requests.LoginRequest;
+import pl.edu.pjwstk.jaz.controllers.requests.RegisterRequest;
 import static io.restassured.RestAssured.given;
 
 @RunWith(SpringRunner.class)

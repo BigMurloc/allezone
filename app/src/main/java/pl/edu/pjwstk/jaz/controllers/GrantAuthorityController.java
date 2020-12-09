@@ -1,12 +1,11 @@
 package pl.edu.pjwstk.jaz.controllers;
 
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import pl.edu.pjwstk.jaz.repositories.UserRepository;
-import pl.edu.pjwstk.jaz.requests.AuthorityRequest;
+import pl.edu.pjwstk.jaz.controllers.requests.AuthorityRequest;
 import pl.edu.pjwstk.jaz.deprecated.UserDB;
 
 @RestController

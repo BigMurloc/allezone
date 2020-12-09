@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.edu.pjwstk.jaz.repositories.UserRepository;
-import pl.edu.pjwstk.jaz.entities.UserEntity;
+import pl.edu.pjwstk.jaz.repositories.entities.UserEntity;
 
 @RestController
 public class UserController {

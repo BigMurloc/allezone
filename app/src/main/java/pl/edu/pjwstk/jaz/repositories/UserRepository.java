@@ -3,14 +3,11 @@ package pl.edu.pjwstk.jaz.repositories;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
-import pl.edu.pjwstk.jaz.entities.UserEntity;
-import pl.edu.pjwstk.jaz.exceptions.UserAlreadyExistsException;
-import pl.edu.pjwstk.jaz.requests.AuthorityRequest;
-import pl.edu.pjwstk.jaz.requests.RegisterRequest;
+import pl.edu.pjwstk.jaz.repositories.entities.UserEntity;
+import pl.edu.pjwstk.jaz.controllers.requests.AuthorityRequest;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
-import java.util.HashSet;
 import java.util.Set;
 
 @Repository

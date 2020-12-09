@@ -1,10 +1,9 @@
-package pl.edu.pjwstk.jaz;
+package pl.edu.pjwstk.jaz.controllers;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import pl.edu.pjwstk.jaz.deprecated.User;
-import pl.edu.pjwstk.jaz.entities.UserEntity;
+import pl.edu.pjwstk.jaz.repositories.entities.UserEntity;
 
 import java.util.*;
 import java.util.stream.Collectors;
