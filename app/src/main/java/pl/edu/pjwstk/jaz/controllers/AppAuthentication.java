@@ -8,6 +8,7 @@ import pl.edu.pjwstk.jaz.repositories.entities.UserEntity;
 import java.util.*;
 import java.util.stream.Collectors;
 
+
 public class AppAuthentication extends AbstractAuthenticationToken {
 
     private final UserEntity authenticatedUser;

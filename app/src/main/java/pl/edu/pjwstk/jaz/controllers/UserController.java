@@ -2,15 +2,10 @@ package pl.edu.pjwstk.jaz.controllers;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.edu.pjwstk.jaz.exceptions.UnauthorizedException;
 import pl.edu.pjwstk.jaz.repositories.UserRepository;
 import pl.edu.pjwstk.jaz.repositories.entities.UserEntity;
-
-import java.security.Principal;
 
 @RestController
 public class UserController {
@@ -20,8 +15,6 @@ public class UserController {
     public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-
-    //todo na strone moze wejsc tylko ten uzytkownik
 
     @GetMapping("/{username}")
     public UserEntity getUserEntity(@PathVariable String username) throws UnauthorizedException {
@@ -35,11 +28,15 @@ public class UserController {
         throw new UnauthorizedException();
     }
 
-    //todo only admin or user
     @PreAuthorize("hasAnyAuthority('admin')")
     @PostMapping("/deleteUser/{username}")
     public void deleteUser(@PathVariable String username){
        userRepository.deleteUser(username);
+    }
+
+    @PatchMapping("/{username}")
+    public void editUser(@PathVariable String username){
+        throw new UnsupportedOperationException("TODO");
     }
 
 }

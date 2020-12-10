@@ -33,6 +33,9 @@ public class UserRepository {
     @Transactional
     public void grantAuthority(AuthorityRequest authorityRequest){
         UserEntity userEntity = findUserByUsername(authorityRequest.getUsername());
+        entityManager.createQuery("SELECT authority FROM AppAuthorityEntity authority WHERE authority.authority = :authority")
+                .setParameter("authority", authorityRequest.getAuthority())
+                .getSingleResult();
         Set<String> authorities = userEntity.getAuthority();
         authorities.add(authorityRequest.getAuthority());
         entityManager.persist(userEntity);

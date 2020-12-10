@@ -1,0 +1,4 @@
+CREATE TABLE app_authority(
+    id BIGSERIAL NOT NULL PRIMARY KEY,
+    authority VARCHAR(255) NOT NULL UNIQUE
+);

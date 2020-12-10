@@ -48,7 +48,7 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
                 exception,
                 bodyOfResponse,
                 new HttpHeaders(),
-                HttpStatus.CONFLICT,
+                HttpStatus.UNAUTHORIZED,
                 request);
     }
 }

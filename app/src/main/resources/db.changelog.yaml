@@ -24,10 +24,10 @@ databaseChangeLog:
         splitStatements: false
         path: db.changelog/20201208_add_user_authority.sql
   - changeSet:
-      id: 20201209_add_admin.sql
+      id: 20201210_add_app_authority.sql
       author: Dominik Pasymowski
       sqlFile:
         relativeToChangelogFile: true
         stripComments: true
         splitStatements: false
-        path: db.changelog/20201209_add_admin.sql
+        path: db.changelog/20201210_add_app_authority.sql

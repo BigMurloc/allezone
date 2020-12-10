@@ -1,3 +1,4 @@
+
 INSERT INTO public.app_user
     (id, username, password)
 VALUES
@@ -9,3 +10,9 @@ VALUES
     (1, 'admin');
 
 ALTER SEQUENCE hibernate_sequence RESTART WITH 2;
+
+INSERT INTO public.app_authority
+    (id, authority)
+VALUES
+    (1, 'admin'),
+    (2, 'grant-authority');
