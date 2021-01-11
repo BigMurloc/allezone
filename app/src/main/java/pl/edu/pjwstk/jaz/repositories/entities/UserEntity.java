@@ -1,17 +1,12 @@
 package pl.edu.pjwstk.jaz.repositories.entities;
 
-import org.hibernate.annotations.*;
-import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "app_user")
-@Component("test")
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -43,10 +43,8 @@ public class UserRepository {
 
     @Transactional
     public void deleteUser(String username) {
-        entityManager
-                .createQuery("DELETE FROM UserEntity ue WHERE ue.username = :username")
-                .setParameter("username", username)
-                .executeUpdate();
+        UserEntity user = findUserByUsername(username);
+        entityManager.remove(user);
     }
 
     @Transactional
