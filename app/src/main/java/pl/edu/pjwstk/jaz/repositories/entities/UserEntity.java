@@ -28,7 +28,7 @@ public class UserEntity {
             }
     )
     @Column(name = "authority")
-    private Set<String> authority = new HashSet<>();
+    private Set<String> authority;
     private String firstName;
     private String lastName;
     private String phoneNumber;

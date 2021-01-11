@@ -9,26 +9,21 @@ import pl.edu.pjwstk.jaz.controllers.requests.AuthorityRequest;
 import pl.edu.pjwstk.jaz.deprecated.UserDB;
 
 @RestController
-public class GrantAuthorityController {
+public class AuthorityController {
 
-//    private final UserDB userDB;
     private final UserRepository userRepository;
 
-    public GrantAuthorityController(UserDB userDB, UserRepository userRepository) {
+    public AuthorityController(UserRepository userRepository) {
         this.userRepository = userRepository;
-//        this.userDB = userDB;
     }
 
     @PreAuthorize("hasAnyAuthority('admin', 'grant-authority')")
     @PostMapping("grant-authority")
     public void grantRole(@RequestBody AuthorityRequest authorityRequest){
-//        User user = userDB.getUser(authorityRequest.getUsername());
-//        if (user != null){
-//            user.addAuthority(authorityRequest.getAuthority());
-//        }
         userRepository.grantAuthority(authorityRequest);
     }
 
+    @PreAuthorize("hasAnyAuthority('admin', 'revoke-authority')")
     @PostMapping("/revoke-authority")
     public void revokeAuthority(@RequestBody AuthorityRequest authorityRequest){
         userRepository.revokeAuthority(authorityRequest);

@@ -4,17 +4,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import pl.edu.pjwstk.jaz.services.AuthenticationService;
-import pl.edu.pjwstk.jaz.services.FilterAuthenthicationService;
 import pl.edu.pjwstk.jaz.controllers.requests.LoginRequest;
 import pl.edu.pjwstk.jaz.exceptions.UnauthorizedException;
+import pl.edu.pjwstk.jaz.services.FilterAuthenticationService;
 
 @RestController
 public class LoginController {
 
 
     private final AuthenticationService authenticationService;
-    private final FilterAuthenthicationService filterAuthenthicationService;
-    public LoginController(AuthenticationService authenticationService, FilterAuthenthicationService filterAuthenthicationService) {
+    private final FilterAuthenticationService filterAuthenthicationService;
+
+    public LoginController(AuthenticationService authenticationService, FilterAuthenticationService filterAuthenthicationService) {
         this.authenticationService = authenticationService;
         this.filterAuthenthicationService = filterAuthenthicationService;
     }

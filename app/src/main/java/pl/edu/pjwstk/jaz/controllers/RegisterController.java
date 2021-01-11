@@ -14,32 +14,14 @@ import pl.edu.pjwstk.jaz.deprecated.UserDB;
 public class RegisterController {
 
     private final UserRepository userRepository;
-//    private final UserDB userDB;
-    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public RegisterController(UserRepository userRepository, UserDB userDB) {
+    public RegisterController(UserRepository userRepository) {
         this.userRepository = userRepository;
-//        this.userDB = userDB;
     }
 
     @PostMapping("/register")
     public void register(@RequestBody RegisterRequest registerRequest) {
-        UserEntity userEntity = createUserEntity(registerRequest);
-        userRepository.saveUser(userEntity);
+        userRepository.saveUser(registerRequest);
     }
-
-    private UserEntity createUserEntity(RegisterRequest registerRequest){
-        UserEntity userEntity = new UserEntity();
-
-        userEntity.setUsername(registerRequest.getUsername());
-        userEntity.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
-        userEntity.setFirstName(registerRequest.getFirstName());
-        userEntity.setLastName(registerRequest.getLastName());
-        userEntity.setPesel(registerRequest.getPesel());
-        userEntity.setPhoneNumber(registerRequest.getPhoneNumber());
-
-        return userEntity;
-    }
-
 
 }

@@ -7,13 +7,13 @@ import pl.edu.pjwstk.jaz.filter.UserSession;
 
 
 @Component
-public class FilterAuthenthicationService {
+public class FilterAuthenticationService {
 
     User user;
     private final UserDB userDB;
     private final UserSession userSession;
 
-    public FilterAuthenthicationService(UserDB userDB, UserSession userSession) {
+    public FilterAuthenticationService(UserDB userDB, UserSession userSession) {
         this.userDB = userDB;
         this.userSession = userSession;
     }
