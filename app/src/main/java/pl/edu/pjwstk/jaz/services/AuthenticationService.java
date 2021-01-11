@@ -13,21 +13,16 @@ import pl.edu.pjwstk.jaz.repositories.UserRepository;
 @Component
 public class AuthenticationService {
 
-//    User user;
-//    private final UserDB userDB;
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public AuthenticationService(UserDB userDB, UserRepository userRepository) {
-//        this.userDB = userDB;
+    public AuthenticationService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     public boolean login(String username, String password) {
-//        user = userDB.getUser(username);
-        UserEntity userEntity = userRepository.findUserByUsername(username);
-        if (passwordEncoder.matches(password, userEntity.getPassword())) {
-            SecurityContextHolder.getContext().setAuthentication(new AppAuthentication(userEntity));
+        UserEntity user = userRepository.findUserByUsername(username);
+        if (userRepository.matches(password, user.getPassword())) {
+            SecurityContextHolder.getContext().setAuthentication(new AppAuthentication(user));
             return true;
         }
         return false;

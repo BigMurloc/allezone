@@ -1,13 +1,15 @@
-package pl.edu.pjwstk.jaz;
+package pl.edu.pjwstk.jaz.authorityIT;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringRunner;
+import pl.edu.pjwstk.jaz.IntegrationTest;
 import pl.edu.pjwstk.jaz.controllers.requests.AuthorityRequest;
 import pl.edu.pjwstk.jaz.controllers.requests.LoginRequest;
 import pl.edu.pjwstk.jaz.controllers.requests.RegisterRequest;
@@ -107,7 +109,7 @@ public class GrantAuthorityTest {
 
         given()
             .cookies(moderatorResponse.getCookies())
-            .body(new AuthorityRequest("user", "test"))
+            .body(new AuthorityRequest("user", "grant-authority"))
             .contentType(ContentType.JSON)
             .post("/api/grant-authority")
         .then()

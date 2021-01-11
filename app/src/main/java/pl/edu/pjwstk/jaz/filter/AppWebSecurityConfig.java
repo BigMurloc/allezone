@@ -1,4 +1,4 @@
-package pl.edu.pjwstk.jaz.config;
+package pl.edu.pjwstk.jaz.filter;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;

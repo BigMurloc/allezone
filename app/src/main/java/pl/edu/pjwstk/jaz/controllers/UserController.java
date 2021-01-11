@@ -34,10 +34,5 @@ public class UserController {
        userRepository.deleteUser(username);
     }
 
-    @PatchMapping("/{username}")
-    public void editUser(@PathVariable String username){
-        throw new UnsupportedOperationException("TODO");
-    }
-
 }
 

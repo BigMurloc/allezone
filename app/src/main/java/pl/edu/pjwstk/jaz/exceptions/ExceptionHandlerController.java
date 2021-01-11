@@ -1,4 +1,4 @@
-package pl.edu.pjwstk.jaz.controllers;
+package pl.edu.pjwstk.jaz.exceptions;
 
 import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.hibernate.exception.ConstraintViolationException;
