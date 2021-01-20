@@ -15,8 +15,8 @@ public class PhotoEntity {
     @JoinColumn(name = "auction_id")
     private AuctionEntity auctionEntity;
 
-
     private String link;
+
     @Column(name = "\"order\"")
     private int order;
 

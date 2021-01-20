@@ -10,6 +10,7 @@ import pl.edu.pjwstk.jaz.repositories.entities.UserEntity;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -25,7 +26,7 @@ public class AuctionRepository {
     public void addAuction(AuctionRequest auctionRequest){
         AuctionEntity auctionEntity = new AuctionEntity();
 
-        addPhoto(auctionRequest.getPhotos());
+        auctionEntity.setPhotoEntity(addPhoto(auctionRequest.getPhotos()));
         UserEntity currentUser =
                 (UserEntity) SecurityContextHolder
                         .getContext()
@@ -39,13 +40,15 @@ public class AuctionRepository {
         entityManager.persist(auctionEntity);
     }
 
-    private void addPhoto(List<PhotoRequest> photos){
+    private List<PhotoEntity> addPhoto(List<PhotoRequest> photos){
+        List<PhotoEntity> photoEntityList = new ArrayList<>();
         for(PhotoRequest photo : photos){
             PhotoEntity photoEntity = new PhotoEntity();
             photoEntity.setLink(photo.getLink());
             photoEntity.setOrder(photo.getOrder());
-            entityManager.persist(photoEntity);
+            photoEntityList.add(photoEntity);
         }
+        return photoEntityList;
     }
 
 }
