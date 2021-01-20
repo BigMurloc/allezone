@@ -18,7 +18,7 @@ public class AuctionEntity {
     private String description;
     private Long price;
 
-    public void setTitle(String title) {
+        public void setTitle(String title) {
         this.title = title;
     }
 
