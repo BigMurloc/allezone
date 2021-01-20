@@ -6,7 +6,7 @@ import javax.persistence.Table;
 import java.util.Set;
 
 @Entity
-@Table(name = "app_user")
+@Table(name = "\"user\"")
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,7 +17,7 @@ public class UserEntity {
 
     @ElementCollection
     @CollectionTable(
-            name = "app_user_authority",
+            name = "user_authority",
             joinColumns = {
                     @JoinColumn(name = "app_user_id")
             }
