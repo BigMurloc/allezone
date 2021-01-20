@@ -3,8 +3,8 @@ package pl.edu.pjwstk.jaz.repositories.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "app_authority")
-public class AppAuthorityEntity {
+@Table(name = "authority")
+public class AuthorityEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
