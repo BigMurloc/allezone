@@ -1,8 +1,7 @@
-package pl.edu.pjwstk.jaz.authorityIT;
+package pl.edu.pjwstk.jaz.authority;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;

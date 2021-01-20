@@ -1,4 +1,4 @@
-package pl.edu.pjwstk.jaz.authorityIT;
+package pl.edu.pjwstk.jaz.authority;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
