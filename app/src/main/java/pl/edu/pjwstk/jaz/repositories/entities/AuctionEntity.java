@@ -26,6 +26,10 @@ public class AuctionEntity {
         this.description = description;
     }
 
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
+    }
+
     public void setPrice(Long price) {
         this.price = price;
     }
