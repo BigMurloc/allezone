@@ -30,17 +30,17 @@ CREATE TABLE auction
 (
     id          BIGINT,
     creator_id  BIGINT,
+    category_id BIGINT,
 
     title       TEXT,
     description TEXT,
     price       BIGINT,
-    category    TEXT,
 
     PRIMARY KEY (id),
     CONSTRAINT user_id_fk
         FOREIGN KEY (creator_id) REFERENCES "user" (id),
     CONSTRAINT category_name_fk
-        FOREIGN KEY (category) REFERENCES category (name)
+        FOREIGN KEY (category_id) REFERENCES category (id)
 );
 
 CREATE TABLE photo

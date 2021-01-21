@@ -9,6 +9,7 @@ public class AuctionRequest {
     private Long price;
     private List<PhotoRequest> photos;
     private List<ParameterRequest> parameters;
+    private String category;
 
     public String getTitle() {
         return title;
@@ -48,5 +49,13 @@ public class AuctionRequest {
 
     public void setParameters(List<ParameterRequest> parameters) {
         this.parameters = parameters;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

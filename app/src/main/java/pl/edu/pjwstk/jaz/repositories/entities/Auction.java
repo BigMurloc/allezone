@@ -15,6 +15,10 @@ public class Auction {
     @JoinColumn(name = "creator_id")
     private User user;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "auction_id")
     private List<Photo> photo;
@@ -80,5 +84,13 @@ public class Auction {
 
     public void setPrice(Long price) {
         this.price = price;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

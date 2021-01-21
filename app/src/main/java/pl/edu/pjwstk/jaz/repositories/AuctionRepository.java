@@ -28,7 +28,7 @@ public class AuctionRepository {
     @Transactional
     public void addAuction(AuctionRequest auctionRequest){
         Auction auction = new Auction();
-        System.out.println(auction.getId());
+        Category category = findCategoryByName(auctionRequest.getCategory());
         User currentUser =
                 (User) SecurityContextHolder
                         .getContext()
@@ -41,6 +41,7 @@ public class AuctionRepository {
         auction.setPrice(auctionRequest.getPrice());
         auction.setPhoto(addPhoto(auctionRequest.getPhotos()));
         auction.setAuctionParameters(addAuctionParameter(auctionRequest.getParameters(), auction));
+        auction.setCategory(category);
 
         entityManager.persist(auction);
     }
@@ -97,6 +98,14 @@ public class AuctionRepository {
         return (Section) entityManager
                 .createQuery(query)
                 .setParameter("name", section)
+                .getSingleResult();
+    }
+
+    private Category findCategoryByName(String category){
+        String query = "SELECT c FROM Category c WHERE c.name =: name";
+        return (Category) entityManager
+                .createQuery(query)
+                .setParameter("name", category)
                 .getSingleResult();
     }
 
