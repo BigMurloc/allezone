@@ -25,17 +25,17 @@ public class AuctionRepository {
     @Transactional
     public void addAuction(AuctionRequest auctionRequest){
         AuctionEntity auctionEntity = new AuctionEntity();
-
-        auctionEntity.setPhotoEntity(addPhoto(auctionRequest.getPhotos()));
         UserEntity currentUser =
                 (UserEntity) SecurityContextHolder
                         .getContext()
                         .getAuthentication()
                         .getPrincipal();
+
         auctionEntity.setUserEntity(currentUser);
         auctionEntity.setTitle(auctionRequest.getTitle());
         auctionEntity.setDescription(auctionRequest.getDescription());
         auctionEntity.setPrice(auctionRequest.getPrice());
+        auctionEntity.setPhotoEntity(addPhoto(auctionRequest.getPhotos()));
 
         entityManager.persist(auctionEntity);
     }

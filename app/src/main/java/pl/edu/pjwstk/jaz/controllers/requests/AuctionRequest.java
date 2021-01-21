@@ -7,15 +7,7 @@ public class AuctionRequest {
     private String title;
     private String description;
     private Long price;
-    private List<PhotoRequest> photo;
-
-    public List<PhotoRequest> getPhotos() {
-        return photo;
-    }
-
-    public void setPhoto(List<PhotoRequest> photo) {
-        this.photo = photo;
-    }
+    private List<PhotoRequest> photos;
 
     public String getTitle() {
         return title;
@@ -39,5 +31,13 @@ public class AuctionRequest {
 
     public void setPrice(Long price) {
         this.price = price;
+    }
+
+    public List<PhotoRequest> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<PhotoRequest> photos) {
+        this.photos = photos;
     }
 }

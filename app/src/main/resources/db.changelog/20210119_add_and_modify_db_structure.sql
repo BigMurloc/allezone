@@ -66,12 +66,11 @@ CREATE TABLE parameter
 
 CREATE TABLE auction_parameter
 (
-    id           BIGINT,
     auction_id   BIGINT,
     parameter_id TEXT,
     value        TEXT,
 
-    PRIMARY KEY (id),
+    PRIMARY KEY (auction_id, parameter_id),
     CONSTRAINT auction_id_fk
         FOREIGN KEY (auction_id) REFERENCES auction (id),
     CONSTRAINT parameter_key_fk
