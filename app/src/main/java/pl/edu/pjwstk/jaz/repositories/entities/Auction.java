@@ -1,13 +1,11 @@
 package pl.edu.pjwstk.jaz.repositories.entities;
 
-import org.hibernate.annotations.Cascade;
-
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "auction")
-public class AuctionEntity {
+public class Auction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,11 +13,11 @@ public class AuctionEntity {
 
     @ManyToOne
     @JoinColumn(name = "creator_id")
-    private UserEntity userEntity;
+    private User user;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "auction_id")
-    private List<PhotoEntity> photoEntity;
+    private List<Photo> photo;
 
     private String title;
     private String description;
@@ -33,15 +31,15 @@ public class AuctionEntity {
         this.description = description;
     }
 
-    public void setUserEntity(UserEntity userEntity) {
-        this.userEntity = userEntity;
+    public void setUserEntity(User user) {
+        this.user = user;
     }
 
     public void setPrice(Long price) {
         this.price = price;
     }
 
-    public void setPhotoEntity(List<PhotoEntity> photoEntity) {
-        this.photoEntity = photoEntity;
+    public void setPhotoEntity(List<Photo> photo) {
+        this.photo = photo;
     }
 }

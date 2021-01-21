@@ -4,7 +4,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
 @Entity
-public class AuctionParameterEntity {
+public class AuctionParameter {
 
     @EmbeddedId
     private AuctionParameterPK auctionParameterPK;

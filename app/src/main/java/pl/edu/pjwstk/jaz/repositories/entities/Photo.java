@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "photo")
-public class PhotoEntity {
+public class Photo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -13,7 +13,7 @@ public class PhotoEntity {
 
     @ManyToOne
     @JoinColumn(name = "auction_id")
-    private AuctionEntity auctionEntity;
+    private Auction auction;
 
     private String link;
 

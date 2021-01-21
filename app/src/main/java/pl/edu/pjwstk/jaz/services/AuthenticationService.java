@@ -1,12 +1,9 @@
 package pl.edu.pjwstk.jaz.services;
 
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import pl.edu.pjwstk.jaz.controllers.AppAuthentication;
-import pl.edu.pjwstk.jaz.deprecated.UserDB;
-import pl.edu.pjwstk.jaz.repositories.entities.UserEntity;
+import pl.edu.pjwstk.jaz.repositories.entities.User;
 import pl.edu.pjwstk.jaz.repositories.UserRepository;
 
 
@@ -20,7 +17,7 @@ public class AuthenticationService {
     }
 
     public boolean login(String username, String password) {
-        UserEntity user = userRepository.findUserByUsername(username);
+        User user = userRepository.findUserByUsername(username);
         if (userRepository.matches(password, user.getPassword())) {
             SecurityContextHolder.getContext().setAuthentication(new AppAuthentication(user));
             return true;

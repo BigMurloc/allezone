@@ -4,9 +4,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 import pl.edu.pjwstk.jaz.controllers.requests.AuctionRequest;
 import pl.edu.pjwstk.jaz.controllers.requests.PhotoRequest;
-import pl.edu.pjwstk.jaz.repositories.entities.AuctionEntity;
-import pl.edu.pjwstk.jaz.repositories.entities.PhotoEntity;
-import pl.edu.pjwstk.jaz.repositories.entities.UserEntity;
+import pl.edu.pjwstk.jaz.repositories.entities.Auction;
+import pl.edu.pjwstk.jaz.repositories.entities.Photo;
+import pl.edu.pjwstk.jaz.repositories.entities.User;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
@@ -24,31 +24,31 @@ public class AuctionRepository {
 
     @Transactional
     public void addAuction(AuctionRequest auctionRequest){
-        AuctionEntity auctionEntity = new AuctionEntity();
-        UserEntity currentUser =
-                (UserEntity) SecurityContextHolder
+        Auction auction = new Auction();
+        User currentUser =
+                (User) SecurityContextHolder
                         .getContext()
                         .getAuthentication()
                         .getPrincipal();
 
-        auctionEntity.setUserEntity(currentUser);
-        auctionEntity.setTitle(auctionRequest.getTitle());
-        auctionEntity.setDescription(auctionRequest.getDescription());
-        auctionEntity.setPrice(auctionRequest.getPrice());
-        auctionEntity.setPhotoEntity(addPhoto(auctionRequest.getPhotos()));
+        auction.setUserEntity(currentUser);
+        auction.setTitle(auctionRequest.getTitle());
+        auction.setDescription(auctionRequest.getDescription());
+        auction.setPrice(auctionRequest.getPrice());
+        auction.setPhotoEntity(addPhoto(auctionRequest.getPhotos()));
 
-        entityManager.persist(auctionEntity);
+        entityManager.persist(auction);
     }
 
-    private List<PhotoEntity> addPhoto(List<PhotoRequest> photos){
-        List<PhotoEntity> photoEntityList = new ArrayList<>();
+    private List<Photo> addPhoto(List<PhotoRequest> photos){
+        List<Photo> photoList = new ArrayList<>();
         for(PhotoRequest photo : photos){
-            PhotoEntity photoEntity = new PhotoEntity();
+            Photo photoEntity = new Photo();
             photoEntity.setLink(photo.getLink());
             photoEntity.setOrder(photo.getOrder());
-            photoEntityList.add(photoEntity);
+            photoList.add(photoEntity);
         }
-        return photoEntityList;
+        return photoList;
     }
 
 }
