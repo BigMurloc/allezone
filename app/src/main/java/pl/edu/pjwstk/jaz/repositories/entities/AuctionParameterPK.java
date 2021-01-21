@@ -1,7 +1,6 @@
 package pl.edu.pjwstk.jaz.repositories.entities;
 //https://stackoverflow.com/questions/3585034/how-to-map-a-composite-key-with-jpa-and-hibernate
 
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
@@ -15,8 +14,20 @@ public class AuctionParameterPK implements Serializable {
     public AuctionParameterPK() {
     }
 
-    public AuctionParameterPK(Long auction_id, Long parameter_id) {
+
+    public Long getAuction_id() {
+        return auction_id;
+    }
+
+    public void setAuction_id(Long auction_id) {
         this.auction_id = auction_id;
+    }
+
+    public Long getParameter_id() {
+        return parameter_id;
+    }
+
+    public void setParameter_id(Long parameter_id) {
         this.parameter_id = parameter_id;
     }
 

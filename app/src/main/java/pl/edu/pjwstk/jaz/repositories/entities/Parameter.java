@@ -1,6 +1,7 @@
 package pl.edu.pjwstk.jaz.repositories.entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "parameter")
@@ -11,6 +12,9 @@ public class Parameter {
     private Long id;
 
     private String key;
+
+    @OneToMany(mappedBy = "parameter", cascade = CascadeType.MERGE)
+    private List<AuctionParameter> auctionParameters;
 
     public Long getId() {
         return id;
