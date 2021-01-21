@@ -20,4 +20,14 @@ public class AuctionController {
         auctionRepository.addAuction(auctionRequest);
     }
 
+    @PostMapping("/section")
+    public void addSection(@RequestBody SectionRequest sectionRequest){
+        auctionRepository.addSection(sectionRequest);
+    }
+
+    @PostMapping("/category")
+    public void addCategory(@RequestBody CategoryRequest categoryRequest){
+        auctionRepository.addCategory(categoryRequest);
+    }
+
 }

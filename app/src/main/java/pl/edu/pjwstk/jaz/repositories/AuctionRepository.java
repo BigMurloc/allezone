@@ -2,6 +2,8 @@ package pl.edu.pjwstk.jaz.repositories;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
+import pl.edu.pjwstk.jaz.controllers.CategoryRequest;
+import pl.edu.pjwstk.jaz.controllers.SectionRequest;
 import pl.edu.pjwstk.jaz.controllers.requests.AuctionRequest;
 import pl.edu.pjwstk.jaz.controllers.requests.ParameterRequest;
 import pl.edu.pjwstk.jaz.controllers.requests.PhotoRequest;
@@ -43,6 +45,22 @@ public class AuctionRepository {
         entityManager.persist(auction);
     }
 
+    @Transactional
+    public void addSection(SectionRequest sectionRequest){
+        Section section = new Section();
+        section.setName(sectionRequest.getName());
+        entityManager.persist(section);
+    }
+
+    @Transactional
+    public void addCategory(CategoryRequest categoryRequest){
+        Category category = new Category();
+        Section section = findSectionByName(categoryRequest.getSection());
+        category.setSection(section);
+        category.setName(categoryRequest.getName());
+        entityManager.persist(category);
+    }
+
     private List<Photo> addPhoto(List<PhotoRequest> photos){
         List<Photo> photoList = new ArrayList<>();
         for(PhotoRequest photo : photos){
@@ -74,5 +92,12 @@ public class AuctionRepository {
         return auctionParameters;
     }
 
+    private Section findSectionByName(String section){
+        String query = "SELECT s FROM Section s WHERE s.name =: name";
+        return (Section) entityManager
+                .createQuery(query)
+                .setParameter("name", section)
+                .getSingleResult();
+    }
 
 }
