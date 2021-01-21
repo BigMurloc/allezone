@@ -11,6 +11,18 @@ public class AuctionParameter {
 
     private String value;
 
+    public AuctionParameterPK getAuctionParameterPK() {
+        return auctionParameterPK;
+    }
+
+    public void setAuctionParameterPK(AuctionParameterPK auctionParameterPK) {
+        this.auctionParameterPK = auctionParameterPK;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
     public void setValue(String value) {
         this.value = value;
     }
