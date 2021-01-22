@@ -1,11 +1,10 @@
 package pl.edu.pjwstk.jaz.controllers;
 
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import pl.edu.pjwstk.jaz.controllers.requests.AuctionRequest;
 import pl.edu.pjwstk.jaz.repositories.AuctionRepository;
-import pl.edu.pjwstk.jaz.repositories.views.AuctionView;
-
-import java.util.List;
 
 @RestController
 public class AuctionController {
@@ -29,16 +28,6 @@ public class AuctionController {
     @PostMapping("/category")
     public void addCategory(@RequestBody CategoryRequest categoryRequest){
         auctionRepository.addCategory(categoryRequest);
-    }
-
-    @GetMapping("/auction")
-    public List<AuctionView> getAuction(){
-        return auctionRepository.getAuction();
-    };
-
-    @GetMapping("/auction/{id}")
-    public AuctionView getAuctionById(@PathVariable Long id){
-        return auctionRepository.getAuctionById(id);
     }
 
 }
