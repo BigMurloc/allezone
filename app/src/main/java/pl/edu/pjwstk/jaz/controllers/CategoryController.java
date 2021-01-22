@@ -3,6 +3,7 @@ package pl.edu.pjwstk.jaz.controllers;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import pl.edu.pjwstk.jaz.controllers.requests.CategoryRequest;
 import pl.edu.pjwstk.jaz.database.services.CategoryService;
 
 @RestController

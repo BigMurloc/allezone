@@ -1,7 +1,7 @@
 package pl.edu.pjwstk.jaz.database.services;
 
 import org.springframework.stereotype.Service;
-import pl.edu.pjwstk.jaz.controllers.CategoryRequest;
+import pl.edu.pjwstk.jaz.controllers.requests.CategoryRequest;
 import pl.edu.pjwstk.jaz.database.entities.Category;
 import pl.edu.pjwstk.jaz.database.entities.Section;
 
