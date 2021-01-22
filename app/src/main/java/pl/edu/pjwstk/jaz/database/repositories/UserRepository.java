@@ -1,10 +1,10 @@
-package pl.edu.pjwstk.jaz.repositories;
+package pl.edu.pjwstk.jaz.database.repositories;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import pl.edu.pjwstk.jaz.controllers.requests.RegisterRequest;
-import pl.edu.pjwstk.jaz.repositories.entities.UserEntity;
+import pl.edu.pjwstk.jaz.database.entities.User;
 import pl.edu.pjwstk.jaz.controllers.requests.AuthorityRequest;
 
 import javax.persistence.EntityManager;
@@ -21,15 +21,15 @@ public class UserRepository {
         this.entityManager = entityManager;
     }
 
-    public UserEntity findUserByUsername(String username){
-        return entityManager.createQuery("select ue from UserEntity ue where ue.username = :username", UserEntity.class)
+    public User findUserByUsername(String username){
+        return entityManager.createQuery("select ue from User ue where ue.username = :username", User.class)
                 .setParameter("username", username)
                 .getSingleResult();
     }
 
     @Transactional
     public void saveUser(RegisterRequest registerRequest) {
-        UserEntity user = new UserEntity();
+        User user = new User();
         String hashedPassword = passwordEncoder.encode(registerRequest.getPassword());
         user.setUsername(registerRequest.getUsername());
         user.setPassword(hashedPassword);
@@ -43,27 +43,27 @@ public class UserRepository {
 
     @Transactional
     public void deleteUser(String username) {
-        UserEntity user = findUserByUsername(username);
+        User user = findUserByUsername(username);
         entityManager.remove(user);
     }
 
     @Transactional
     public void grantAuthority(AuthorityRequest authorityRequest){
-        UserEntity userEntity = findUserByUsername(authorityRequest.getUsername());
-        entityManager.createQuery("SELECT authority FROM AuthorityEntity authority WHERE authority.authority = :authority")
+        User user = findUserByUsername(authorityRequest.getUsername());
+        entityManager.createQuery("SELECT authority FROM Authority authority WHERE authority.authority = :authority")
                 .setParameter("authority", authorityRequest.getAuthority())
                 .getSingleResult();
-        Set<String> authorities = userEntity.getAuthority();
+        Set<String> authorities = user.getAuthority();
         authorities.add(authorityRequest.getAuthority());
-        entityManager.persist(userEntity);
+        entityManager.persist(user);
     }
 
     @Transactional
     public void revokeAuthority(AuthorityRequest authorityRequest) {
-        UserEntity userEntity = findUserByUsername(authorityRequest.getUsername());
-        Set<String> authorities = userEntity.getAuthority();
+        User user = findUserByUsername(authorityRequest.getUsername());
+        Set<String> authorities = user.getAuthority();
         authorities.remove(authorityRequest.getAuthority());
-        entityManager.persist(userEntity);
+        entityManager.persist(user);
     }
 
     public boolean matches(String rawPassword, String hashedPassword){

@@ -4,8 +4,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pjwstk.jaz.exceptions.UnauthorizedException;
-import pl.edu.pjwstk.jaz.repositories.UserRepository;
-import pl.edu.pjwstk.jaz.repositories.entities.UserEntity;
+import pl.edu.pjwstk.jaz.database.repositories.UserRepository;
+import pl.edu.pjwstk.jaz.database.entities.User;
 
 @RestController
 public class UserController {
@@ -17,9 +17,9 @@ public class UserController {
     }
 
     @GetMapping("/{username}")
-    public UserEntity getUserEntity(@PathVariable String username) throws UnauthorizedException {
-        UserEntity currentUser =
-        (UserEntity) SecurityContextHolder
+    public User getUserEntity(@PathVariable String username) throws UnauthorizedException {
+        User currentUser =
+        (User) SecurityContextHolder
                 .getContext()
                 .getAuthentication()
                 .getPrincipal();

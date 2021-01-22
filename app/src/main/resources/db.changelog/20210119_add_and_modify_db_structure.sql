@@ -30,17 +30,17 @@ CREATE TABLE auction
 (
     id          BIGINT,
     creator_id  BIGINT,
+    category_id BIGINT,
 
     title       TEXT,
     description TEXT,
     price       BIGINT,
-    category    TEXT,
 
     PRIMARY KEY (id),
     CONSTRAINT user_id_fk
         FOREIGN KEY (creator_id) REFERENCES "user" (id),
     CONSTRAINT category_name_fk
-        FOREIGN KEY (category) REFERENCES category (name)
+        FOREIGN KEY (category_id) REFERENCES category (id)
 );
 
 CREATE TABLE photo
@@ -66,15 +66,14 @@ CREATE TABLE parameter
 
 CREATE TABLE auction_parameter
 (
-    id           BIGINT,
     auction_id   BIGINT,
-    parameter_id TEXT,
+    parameter_id BIGINT,
     value        TEXT,
 
-    PRIMARY KEY (id),
+    PRIMARY KEY (auction_id, parameter_id),
     CONSTRAINT auction_id_fk
         FOREIGN KEY (auction_id) REFERENCES auction (id),
     CONSTRAINT parameter_key_fk
-        FOREIGN KEY (parameter_id) REFERENCES parameter (key)
+        FOREIGN KEY (parameter_id) REFERENCES parameter (id)
 );
 

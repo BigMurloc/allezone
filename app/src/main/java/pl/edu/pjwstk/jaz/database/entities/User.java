@@ -1,4 +1,4 @@
-package pl.edu.pjwstk.jaz.repositories.entities;
+package pl.edu.pjwstk.jaz.database.entities;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "\"user\"")
-public class UserEntity {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -30,10 +30,10 @@ public class UserEntity {
     @Column(unique = true)
     private String pesel;
 
-    public UserEntity() {
+    public User() {
     }
 
-    public UserEntity(String username, String password) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
