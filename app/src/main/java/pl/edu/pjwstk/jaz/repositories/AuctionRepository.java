@@ -8,6 +8,7 @@ import pl.edu.pjwstk.jaz.controllers.requests.AuctionRequest;
 import pl.edu.pjwstk.jaz.controllers.requests.ParameterRequest;
 import pl.edu.pjwstk.jaz.controllers.requests.PhotoRequest;
 import pl.edu.pjwstk.jaz.repositories.entities.*;
+import pl.edu.pjwstk.jaz.repositories.views.AuctionView;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
@@ -106,6 +107,21 @@ public class AuctionRepository {
         return (Category) entityManager
                 .createQuery(query)
                 .setParameter("name", category)
+                .getSingleResult();
+    }
+
+    public List<AuctionView> getAuction(){
+        List<AuctionView> auctionView = new ArrayList<>();
+        return auctionView = entityManager
+                .createQuery("SELECT v FROM AuctionView v", AuctionView.class)
+                .getResultList();
+    }
+
+    public AuctionView getAuctionById(Long id){
+        AuctionView auctionView = new AuctionView();
+        return auctionView = (AuctionView) entityManager
+                .createQuery("SELECT v FROM AuctionView v WHERE v.id =:id")
+                .setParameter("id", id)
                 .getSingleResult();
     }
 
