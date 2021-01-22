@@ -1,10 +1,10 @@
-package pl.edu.pjwstk.jaz.services;
+package pl.edu.pjwstk.jaz.database.services;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import pl.edu.pjwstk.jaz.controllers.AppAuthentication;
-import pl.edu.pjwstk.jaz.repositories.entities.User;
-import pl.edu.pjwstk.jaz.repositories.UserRepository;
+import pl.edu.pjwstk.jaz.database.entities.User;
+import pl.edu.pjwstk.jaz.database.repositories.UserRepository;
 
 
 @Component

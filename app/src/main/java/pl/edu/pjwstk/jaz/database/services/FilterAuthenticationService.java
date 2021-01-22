@@ -1,4 +1,4 @@
-package pl.edu.pjwstk.jaz.services;
+package pl.edu.pjwstk.jaz.database.services;
 
 import org.springframework.stereotype.Component;
 import pl.edu.pjwstk.jaz.deprecated.User;

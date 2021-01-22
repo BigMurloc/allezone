@@ -1,4 +1,4 @@
-package pl.edu.pjwstk.jaz.repositories.entities;
+package pl.edu.pjwstk.jaz.database.entities;
 //https://stackoverflow.com/questions/3585034/how-to-map-a-composite-key-with-jpa-and-hibernate
 
 import javax.persistence.Embeddable;

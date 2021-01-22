@@ -1,13 +1,9 @@
-package pl.edu.pjwstk.jaz.repositories;
+package pl.edu.pjwstk.jaz.database.repositories;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.web.servlet.tags.Param;
-import pl.edu.pjwstk.jaz.controllers.requests.ParameterRequest;
-import pl.edu.pjwstk.jaz.repositories.entities.Parameter;
-import pl.edu.pjwstk.jaz.repositories.entities.User;
+import pl.edu.pjwstk.jaz.database.entities.Parameter;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 @Repository
@@ -43,10 +39,7 @@ public class ParameterRepository {
                 .setParameter("key", key)
                 .getSingleResult();
 
-        if(count == 0){
-            return false;
-        }
-        return true;
+        return count != 0;
 
     }
 }

@@ -1,7 +1,7 @@
-package pl.edu.pjwstk.jaz.repositories.views;
+package pl.edu.pjwstk.jaz.database.views;
 
 import org.hibernate.annotations.Immutable;
-import pl.edu.pjwstk.jaz.repositories.entities.AuctionParameterPK;
+import pl.edu.pjwstk.jaz.database.entities.AuctionParameterPK;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;

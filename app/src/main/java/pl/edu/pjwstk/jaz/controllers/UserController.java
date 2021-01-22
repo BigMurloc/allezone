@@ -4,8 +4,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pjwstk.jaz.exceptions.UnauthorizedException;
-import pl.edu.pjwstk.jaz.repositories.UserRepository;
-import pl.edu.pjwstk.jaz.repositories.entities.User;
+import pl.edu.pjwstk.jaz.database.repositories.UserRepository;
+import pl.edu.pjwstk.jaz.database.entities.User;
 
 @RestController
 public class UserController {

@@ -3,10 +3,10 @@ package pl.edu.pjwstk.jaz.controllers;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import pl.edu.pjwstk.jaz.services.AuthenticationService;
+import pl.edu.pjwstk.jaz.database.services.AuthenticationService;
 import pl.edu.pjwstk.jaz.controllers.requests.LoginRequest;
 import pl.edu.pjwstk.jaz.exceptions.UnauthorizedException;
-import pl.edu.pjwstk.jaz.services.FilterAuthenticationService;
+import pl.edu.pjwstk.jaz.database.services.FilterAuthenticationService;
 
 @RestController
 public class LoginController {

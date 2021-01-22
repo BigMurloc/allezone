@@ -1,10 +1,10 @@
-package pl.edu.pjwstk.jaz.repositories;
+package pl.edu.pjwstk.jaz.database.repositories;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import pl.edu.pjwstk.jaz.controllers.requests.RegisterRequest;
-import pl.edu.pjwstk.jaz.repositories.entities.User;
+import pl.edu.pjwstk.jaz.database.entities.User;
 import pl.edu.pjwstk.jaz.controllers.requests.AuthorityRequest;
 
 import javax.persistence.EntityManager;
@@ -50,7 +50,7 @@ public class UserRepository {
     @Transactional
     public void grantAuthority(AuthorityRequest authorityRequest){
         User user = findUserByUsername(authorityRequest.getUsername());
-        entityManager.createQuery("SELECT authority FROM AuthorityEntity authority WHERE authority.authority = :authority")
+        entityManager.createQuery("SELECT authority FROM Authority authority WHERE authority.authority = :authority")
                 .setParameter("authority", authorityRequest.getAuthority())
                 .getSingleResult();
         Set<String> authorities = user.getAuthority();

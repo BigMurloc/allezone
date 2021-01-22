@@ -1,10 +1,8 @@
-package pl.edu.pjwstk.jaz.repositories.views;
+package pl.edu.pjwstk.jaz.database.views;
 
 import org.hibernate.annotations.Immutable;
-import pl.edu.pjwstk.jaz.repositories.entities.AuctionParameter;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "auction_view")

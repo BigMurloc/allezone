@@ -1,4 +1,4 @@
-package pl.edu.pjwstk.jaz.repositories;
+package pl.edu.pjwstk.jaz.database.repositories;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
@@ -7,8 +7,8 @@ import pl.edu.pjwstk.jaz.controllers.SectionRequest;
 import pl.edu.pjwstk.jaz.controllers.requests.AuctionRequest;
 import pl.edu.pjwstk.jaz.controllers.requests.ParameterRequest;
 import pl.edu.pjwstk.jaz.controllers.requests.PhotoRequest;
-import pl.edu.pjwstk.jaz.repositories.entities.*;
-import pl.edu.pjwstk.jaz.repositories.views.AuctionView;
+import pl.edu.pjwstk.jaz.database.entities.*;
+import pl.edu.pjwstk.jaz.database.views.AuctionView;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;

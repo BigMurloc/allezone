@@ -2,8 +2,8 @@ package pl.edu.pjwstk.jaz.controllers;
 
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pjwstk.jaz.controllers.requests.AuctionRequest;
-import pl.edu.pjwstk.jaz.repositories.AuctionRepository;
-import pl.edu.pjwstk.jaz.repositories.views.AuctionView;
+import pl.edu.pjwstk.jaz.database.repositories.AuctionRepository;
+import pl.edu.pjwstk.jaz.database.views.AuctionView;
 
 import java.util.List;
 
@@ -34,7 +34,7 @@ public class AuctionController {
     @GetMapping("/auction")
     public List<AuctionView> getAuction(){
         return auctionRepository.getAuction();
-    };
+    }
 
     @GetMapping("/auction/{id}")
     public AuctionView getAuctionById(@PathVariable Long id){
