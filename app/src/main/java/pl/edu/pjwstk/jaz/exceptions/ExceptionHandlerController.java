@@ -19,36 +19,36 @@ import javax.persistence.NoResultException;
 public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
 
 
-    @ExceptionHandler(value = ConstraintViolationException.class)
-    protected ResponseEntity<Object> handleUserAlreadyExistsException(RuntimeException exception, WebRequest request) {
-        String bodyOfResponse = "User already exists";
-        return handleExceptionInternal(
-                exception,
-                bodyOfResponse,
-                new HttpHeaders(),
-                HttpStatus.CONFLICT,
-                request);
-    }
-
-    @ExceptionHandler(value = NoResultException.class)
-    protected ResponseEntity<Object> handleNoResultException(RuntimeException exception, WebRequest request) {
-        String bodyOfResponse = "User does not exist";
-        return handleExceptionInternal(
-                exception,
-                bodyOfResponse,
-                new HttpHeaders(),
-                HttpStatus.CONFLICT,
-                request);
-    }
-
-    @ExceptionHandler(value = UnauthorizedException.class)
-    protected ResponseEntity<Object> handleUnauthorizedException(RuntimeException exception, WebRequest request) {
-        String bodyOfResponse = "";
-        return handleExceptionInternal(
-                exception,
-                bodyOfResponse,
-                new HttpHeaders(),
-                HttpStatus.UNAUTHORIZED,
-                request);
-    }
+//    @ExceptionHandler(value = ConstraintViolationException.class)
+//    protected ResponseEntity<Object> handleUserAlreadyExistsException(RuntimeException exception, WebRequest request) {
+//        String bodyOfResponse = "User already exists";
+//        return handleExceptionInternal(
+//                exception,
+//                bodyOfResponse,
+//                new HttpHeaders(),
+//                HttpStatus.CONFLICT,
+//                request);
+//    }
+//
+//    @ExceptionHandler(value = NoResultException.class)
+//    protected ResponseEntity<Object> handleNoResultException(RuntimeException exception, WebRequest request) {
+//        String bodyOfResponse = "User does not exist";
+//        return handleExceptionInternal(
+//                exception,
+//                bodyOfResponse,
+//                new HttpHeaders(),
+//                HttpStatus.CONFLICT,
+//                request);
+//    }
+//
+//    @ExceptionHandler(value = UnauthorizedException.class)
+//    protected ResponseEntity<Object> handleUnauthorizedException(RuntimeException exception, WebRequest request) {
+//        String bodyOfResponse = "";
+//        return handleExceptionInternal(
+//                exception,
+//                bodyOfResponse,
+//                new HttpHeaders(),
+//                HttpStatus.UNAUTHORIZED,
+//                request);
+//    }
 }

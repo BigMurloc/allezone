@@ -29,14 +29,16 @@ public class AuctionService {
 
     @Transactional
     public void addAuction(AuctionRequest auctionRequest){
-        Auction auction = new Auction();
+        entityManager.persist(setUpAuction(new Auction(), auctionRequest));
+    }
+
+    public Auction setUpAuction(Auction auction, AuctionRequest auctionRequest) {
         Category category = categoryService.findCategoryByName(auctionRequest.getCategory());
         User currentUser =
                 (User) SecurityContextHolder
                         .getContext()
                         .getAuthentication()
                         .getPrincipal();
-
         auction.setUser(currentUser);
         auction.setTitle(auctionRequest.getTitle());
         auction.setDescription(auctionRequest.getDescription());
@@ -44,10 +46,8 @@ public class AuctionService {
         auction.setPhoto(addPhoto(auctionRequest.getPhotos()));
         auction.setAuctionParameters(addAuctionParameter(auctionRequest.getParameters(), auction));
         auction.setCategory(category);
-
-        entityManager.persist(auction);
+        return auction;
     }
-
 
 
     //private------

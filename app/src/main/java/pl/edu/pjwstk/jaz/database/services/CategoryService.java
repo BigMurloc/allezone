@@ -28,6 +28,11 @@ public class CategoryService {
         entityManager.persist(category);
     }
 
+    @Transactional
+    public void updateCategory(Category category){
+        entityManager.merge(category);
+    }
+
     public Category findCategoryByName(String category){
         String query = "SELECT c FROM Category c WHERE c.name =: name";
         return (Category) entityManager
@@ -36,4 +41,11 @@ public class CategoryService {
                 .getSingleResult();
     }
 
+    public Category findCategoryById(Long id) {
+        String query = "SELECT c FROM Category c WHERE c.id =: id";
+        return (Category) entityManager
+                .createQuery(query)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
 }
