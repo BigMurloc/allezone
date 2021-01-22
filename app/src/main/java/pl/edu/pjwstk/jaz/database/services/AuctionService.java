@@ -3,8 +3,6 @@ package pl.edu.pjwstk.jaz.database.services;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import pl.edu.pjwstk.jaz.controllers.CategoryRequest;
-import pl.edu.pjwstk.jaz.controllers.SectionRequest;
 import pl.edu.pjwstk.jaz.controllers.requests.AuctionRequest;
 import pl.edu.pjwstk.jaz.controllers.requests.ParameterRequest;
 import pl.edu.pjwstk.jaz.controllers.requests.PhotoRequest;
@@ -21,16 +19,18 @@ public class AuctionService {
 
     private final EntityManager entityManager;
     private final ParameterRepository parameterRepository;
+    private final CategoryService categoryService;
 
-    public AuctionService(EntityManager entityManager, ParameterRepository parameterRepository) {
+    public AuctionService(EntityManager entityManager, ParameterRepository parameterRepository, CategoryService categoryService) {
         this.entityManager = entityManager;
         this.parameterRepository = parameterRepository;
+        this.categoryService = categoryService;
     }
 
     @Transactional
     public void addAuction(AuctionRequest auctionRequest){
         Auction auction = new Auction();
-        Category category = findCategoryByName(auctionRequest.getCategory());
+        Category category = categoryService.findCategoryByName(auctionRequest.getCategory());
         User currentUser =
                 (User) SecurityContextHolder
                         .getContext()
@@ -48,22 +48,9 @@ public class AuctionService {
         entityManager.persist(auction);
     }
 
-    @Transactional
-    public void addSection(SectionRequest sectionRequest){
-        Section section = new Section();
-        section.setName(sectionRequest.getName());
-        entityManager.persist(section);
-    }
 
-    @Transactional
-    public void addCategory(CategoryRequest categoryRequest){
-        Category category = new Category();
-        Section section = findSectionByName(categoryRequest.getSection());
-        category.setSection(section);
-        category.setName(categoryRequest.getName());
-        entityManager.persist(category);
-    }
 
+    //private------
     private List<Photo> addPhoto(List<PhotoRequest> photos){
         List<Photo> photoList = new ArrayList<>();
         for(PhotoRequest photo : photos){
@@ -93,22 +80,6 @@ public class AuctionService {
         }
 
         return auctionParameters;
-    }
-
-    private Section findSectionByName(String section){
-        String query = "SELECT s FROM Section s WHERE s.name =: name";
-        return (Section) entityManager
-                .createQuery(query)
-                .setParameter("name", section)
-                .getSingleResult();
-    }
-
-    private Category findCategoryByName(String category){
-        String query = "SELECT c FROM Category c WHERE c.name =: name";
-        return (Category) entityManager
-                .createQuery(query)
-                .setParameter("name", category)
-                .getSingleResult();
     }
 
 }
