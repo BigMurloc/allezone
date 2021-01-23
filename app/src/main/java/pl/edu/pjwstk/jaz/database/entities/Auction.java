@@ -29,6 +29,7 @@ public class Auction {
     private String title;
     private String description;
     private Long price;
+    private Long version = 0L;
 
     public Long getId() {
         return id;
@@ -94,4 +95,11 @@ public class Auction {
         this.category = category;
     }
 
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
+    }
 }

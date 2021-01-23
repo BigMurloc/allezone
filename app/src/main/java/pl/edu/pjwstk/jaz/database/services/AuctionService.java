@@ -53,6 +53,9 @@ public class AuctionService {
         auction.setPrice(auctionRequest.getPrice());
         auction.setPhoto(addPhoto(auctionRequest.getPhotos()));
         auction.setCategory(category);
+        Long version = auction.getVersion();
+        version++;
+        auction.setVersion(version++);
         return auction;
     }
 
