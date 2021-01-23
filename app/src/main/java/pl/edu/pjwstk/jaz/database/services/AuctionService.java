@@ -31,7 +31,6 @@ public class AuctionService {
     public void addAuction(AuctionRequest auctionRequest){
         Auction auction = new Auction();
         auction = setUpAuction(auction, auctionRequest);
-        auction.setAuctionParameters(addAuctionParameter(auctionRequest.getParameters(), auction));
         entityManager.persist(auction);
     }
 
@@ -53,6 +52,7 @@ public class AuctionService {
         auction.setPrice(auctionRequest.getPrice());
         auction.setPhoto(addPhoto(auctionRequest.getPhotos()));
         auction.setCategory(category);
+        auction.setAuctionParameters(addAuctionParameter(auctionRequest.getParameters(), auction));
         Long version = auction.getVersion();
         version++;
         auction.setVersion(version++);
