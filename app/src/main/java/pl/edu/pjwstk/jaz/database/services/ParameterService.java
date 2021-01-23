@@ -1,4 +1,4 @@
-package pl.edu.pjwstk.jaz.database.repositories;
+package pl.edu.pjwstk.jaz.database.services;
 
 import org.springframework.stereotype.Repository;
 import pl.edu.pjwstk.jaz.database.entities.Parameter;
@@ -7,11 +7,11 @@ import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 @Repository
-public class ParameterRepository {
+public class ParameterService {
 
     private final EntityManager entityManager;
 
-    public ParameterRepository(EntityManager entityManager) {
+    public ParameterService(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
@@ -20,7 +20,6 @@ public class ParameterRepository {
         if(!doesExistParameterKey(key)){
             Parameter parameter = new Parameter();
             parameter.setKey(key);
-            System.out.println("XD");
             entityManager.persist(parameter);
         }
     }
