@@ -93,4 +93,5 @@ public class Auction {
     public void setCategory(Category category) {
         this.category = category;
     }
+
 }

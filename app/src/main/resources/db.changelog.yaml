@@ -39,4 +39,13 @@ databaseChangeLog:
         stripComments: true
         splitStatements: false
         path: db.changelog/20210119_add_and_modify_db_structure.sql
+  - changeSet:
+      id: 20210123_add_auction_version.sql
+      author: Dominik Pasymowski
+      sqlFile:
+        relativeToChangelogFile: true
+        stripComments: true
+        splitStatements: false
+        path: db.changelog/20210123_add_auction_version.sql
+
 

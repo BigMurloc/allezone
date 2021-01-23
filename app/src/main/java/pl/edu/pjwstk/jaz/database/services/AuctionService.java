@@ -29,12 +29,15 @@ public class AuctionService {
 
     @Transactional
     public void addAuction(AuctionRequest auctionRequest){
-        entityManager.persist(setUpAuction(new Auction(), auctionRequest));
+        Auction auction = new Auction();
+        auction = setUpAuction(auction, auctionRequest);
+        auction.setAuctionParameters(addAuctionParameter(auctionRequest.getParameters(), auction));
+        entityManager.persist(auction);
     }
 
     @Transactional
     public void updateAuction(Auction auction){
-        entityManager.persist(auction);
+        entityManager.merge(auction);
     }
 
     public Auction setUpAuction(Auction auction, AuctionRequest auctionRequest) {
@@ -49,7 +52,6 @@ public class AuctionService {
         auction.setDescription(auctionRequest.getDescription());
         auction.setPrice(auctionRequest.getPrice());
         auction.setPhoto(addPhoto(auctionRequest.getPhotos()));
-        auction.setAuctionParameters(addAuctionParameter(auctionRequest.getParameters(), auction));
         auction.setCategory(category);
         return auction;
     }
@@ -79,7 +81,6 @@ public class AuctionService {
 
         for(ParameterRequest parameterRequest : parameters){
             AuctionParameter auctionParameter = new AuctionParameter();
-
 
             parameterRepository.addParameter(parameterRequest.getKey());
             Parameter parameter = parameterRepository.findParameterByKey(parameterRequest.getKey());
