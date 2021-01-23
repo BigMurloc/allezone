@@ -32,6 +32,11 @@ public class AuctionService {
         entityManager.persist(setUpAuction(new Auction(), auctionRequest));
     }
 
+    @Transactional
+    public void updateAuction(Auction auction){
+        entityManager.persist(auction);
+    }
+
     public Auction setUpAuction(Auction auction, AuctionRequest auctionRequest) {
         Category category = categoryService.findCategoryByName(auctionRequest.getCategory());
         User currentUser =
@@ -49,6 +54,13 @@ public class AuctionService {
         return auction;
     }
 
+    public Auction findAuctionById(Long id){
+        Auction auction = new Auction();
+        return auction = (Auction) entityManager
+                .createQuery("SELECT a FROM Auction a  WHERE a.id=:id")
+                .setParameter("id", id)
+                .getSingleResult();
+    }
 
     //private------
     private List<Photo> addPhoto(List<PhotoRequest> photos){

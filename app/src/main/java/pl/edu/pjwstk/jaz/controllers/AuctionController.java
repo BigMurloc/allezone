@@ -38,10 +38,9 @@ public class AuctionController {
 
     @PutMapping("/auction/{id}")
     public void updateAuction(@PathVariable Long id, @RequestBody AuctionRequest auctionRequest){
-//        Auction auction = auctionService.findAuctionById(id);
-//        auctionService.updateAuction(auction);
+        Auction auction = auctionService.findAuctionById(id);
+        auctionService.setUpAuction(auction, auctionRequest);
+        auctionService.updateAuction(auction);
     }
-
-
 
 }
