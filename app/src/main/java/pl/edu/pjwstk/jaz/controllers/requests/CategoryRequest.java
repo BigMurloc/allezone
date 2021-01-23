@@ -1,4 +1,4 @@
-package pl.edu.pjwstk.jaz.controllers;
+package pl.edu.pjwstk.jaz.controllers.requests;
 
 public class CategoryRequest {
 

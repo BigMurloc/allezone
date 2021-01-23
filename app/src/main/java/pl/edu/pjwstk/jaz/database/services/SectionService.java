@@ -1,7 +1,7 @@
 package pl.edu.pjwstk.jaz.database.services;
 
 import org.springframework.stereotype.Service;
-import pl.edu.pjwstk.jaz.controllers.SectionRequest;
+import pl.edu.pjwstk.jaz.controllers.requests.SectionRequest;
 import pl.edu.pjwstk.jaz.database.entities.Section;
 
 import javax.persistence.EntityManager;
@@ -23,11 +23,24 @@ public class SectionService {
         entityManager.persist(section);
     }
 
-    public Section findSectionByName(String section){
+    public Section findSectionById(Long id){
+        String query = "SELECT s FROM Section s WHERE s.id =: id";
+        return (Section) entityManager
+                .createQuery(query)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
+
+    public Section findSectionByName(String name){
         String query = "SELECT s FROM Section s WHERE s.name =: name";
         return (Section) entityManager
                 .createQuery(query)
-                .setParameter("name", section)
+                .setParameter("name", name)
                 .getSingleResult();
+    }
+
+    @Transactional
+    public void updateSection(Section section) {
+        entityManager.merge(section);
     }
 }

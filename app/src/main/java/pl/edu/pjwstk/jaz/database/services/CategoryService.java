@@ -1,7 +1,7 @@
 package pl.edu.pjwstk.jaz.database.services;
 
 import org.springframework.stereotype.Service;
-import pl.edu.pjwstk.jaz.controllers.CategoryRequest;
+import pl.edu.pjwstk.jaz.controllers.requests.CategoryRequest;
 import pl.edu.pjwstk.jaz.database.entities.Category;
 import pl.edu.pjwstk.jaz.database.entities.Section;
 
@@ -28,6 +28,11 @@ public class CategoryService {
         entityManager.persist(category);
     }
 
+    @Transactional
+    public void updateCategory(Category category){
+        entityManager.merge(category);
+    }
+
     public Category findCategoryByName(String category){
         String query = "SELECT c FROM Category c WHERE c.name =: name";
         return (Category) entityManager
@@ -36,4 +41,11 @@ public class CategoryService {
                 .getSingleResult();
     }
 
+    public Category findCategoryById(Long id) {
+        String query = "SELECT c FROM Category c WHERE c.id =: id";
+        return (Category) entityManager
+                .createQuery(query)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
 }
