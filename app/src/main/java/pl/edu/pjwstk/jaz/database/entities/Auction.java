@@ -2,6 +2,7 @@ package pl.edu.pjwstk.jaz.database.entities;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "auction")
@@ -30,6 +31,19 @@ public class Auction {
     private String description;
     private Long price;
     private Long version = 0L;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Auction)) return false;
+        Auction auction = (Auction) o;
+        return getId().equals(auction.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
 
     public Long getId() {
         return id;

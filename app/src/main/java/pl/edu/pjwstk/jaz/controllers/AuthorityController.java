@@ -4,15 +4,15 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import pl.edu.pjwstk.jaz.database.repositories.UserRepository;
+import pl.edu.pjwstk.jaz.database.services.UserService;
 import pl.edu.pjwstk.jaz.controllers.requests.AuthorityRequest;
 
 @RestController
 public class AuthorityController {
 
-    private final UserRepository userRepository;
+    private final UserService userRepository;
 
-    public AuthorityController(UserRepository userRepository) {
+    public AuthorityController(UserService userRepository) {
         this.userRepository = userRepository;
     }
 

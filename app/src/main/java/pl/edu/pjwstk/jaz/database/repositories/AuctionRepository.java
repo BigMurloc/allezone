@@ -11,24 +11,33 @@ import java.util.List;
 public class AuctionRepository {
 
     private final EntityManager entityManager;
+    private final AuctionParameterRepository auctionParameterRepository;
 
-    public AuctionRepository(EntityManager entityManager) {
+    public AuctionRepository(EntityManager entityManager,
+                             AuctionParameterRepository auctionParameterRepository) {
         this.entityManager = entityManager;
+        this.auctionParameterRepository = auctionParameterRepository;
     }
 
     public List<AuctionView> getAuction(){
-        List<AuctionView> auctionView = new ArrayList<>();
-        return auctionView = entityManager
+        List<AuctionView> auctionViews;
+        auctionViews = entityManager
                 .createQuery("SELECT v FROM AuctionView v", AuctionView.class)
                 .getResultList();
+        for (AuctionView auctionView : auctionViews) {
+            auctionView.setParameters(auctionParameterRepository.getAuctionParametersByAuctionId(auctionView.getId()));
+        }
+        return auctionViews;
     }
 
     public AuctionView getAuctionById(Long id){
-        AuctionView auctionView = new AuctionView();
-        return auctionView = (AuctionView) entityManager
-                .createQuery("SELECT v FROM AuctionView v WHERE v.id =:id")
+        AuctionView auctionView;
+        auctionView = entityManager
+                .createQuery("SELECT v FROM AuctionView v WHERE v.id =:id", AuctionView.class)
                 .setParameter("id", id)
                 .getSingleResult();
+        auctionView.setParameters(auctionParameterRepository.getAuctionParametersByAuctionId(auctionView.getId()));
+        return auctionView;
     }
 
 }

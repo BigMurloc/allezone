@@ -47,5 +47,13 @@ databaseChangeLog:
         stripComments: true
         splitStatements: false
         path: db.changelog/20210123_add_auction_version.sql
+  - changeSet:
+      id: 20210124_add_auction_and_parameter_view.sql
+      author: Dominik Pasymowski
+      sqlFile:
+        relativeToChangelogFile: true
+        stripComments: true
+        splitStatements: false
+        path: db.changelog/20210124_add_auction_and_parameter_view.sql
 
 

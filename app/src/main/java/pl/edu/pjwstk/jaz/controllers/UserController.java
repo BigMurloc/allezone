@@ -4,15 +4,15 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pjwstk.jaz.exceptions.UnauthorizedException;
-import pl.edu.pjwstk.jaz.database.repositories.UserRepository;
+import pl.edu.pjwstk.jaz.database.services.UserService;
 import pl.edu.pjwstk.jaz.database.entities.User;
 
 @RestController
 public class UserController {
-    private final UserRepository userRepository;
+    private final UserService userRepository;
 
 
-    public UserController(UserRepository userRepository) {
+    public UserController(UserService userRepository) {
         this.userRepository = userRepository;
     }
 

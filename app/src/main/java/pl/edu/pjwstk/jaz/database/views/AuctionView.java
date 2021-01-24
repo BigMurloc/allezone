@@ -3,6 +3,7 @@ package pl.edu.pjwstk.jaz.database.views;
 import org.hibernate.annotations.Immutable;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "auction_view")
@@ -35,8 +36,8 @@ public class AuctionView {
     @Column
     private String thumbnail;
 
-//    @OneToMany
-//    private List<ParameterView> parameters;
+    @OneToMany
+    private List<AuctionParameterView> parameters;
 
     public Long getId() {
         return id;
@@ -102,11 +103,11 @@ public class AuctionView {
         this.thumbnail = thumbnail;
     }
 
-//    public List<ParameterView> getParameters() {
-//        return parameters;
-//    }
-//
-//    public void setParameters(List<ParameterView> parameters) {
-//        this.parameters = parameters;
-//    }
+    public List<AuctionParameterView> getParameters() {
+        return parameters;
+    }
+
+    public void setParameters(List<AuctionParameterView> parameters) {
+        this.parameters = parameters;
+    }
 }
