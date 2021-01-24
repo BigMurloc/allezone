@@ -1,4 +1,4 @@
-package pl.edu.pjwstk.jaz.database.repositories;
+package pl.edu.pjwstk.jaz.database.services;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,11 +13,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Repository
-public class UserRepository {
+public class UserService {
     private final EntityManager entityManager;
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public UserRepository(EntityManager entityManager) {
+    public UserService(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 

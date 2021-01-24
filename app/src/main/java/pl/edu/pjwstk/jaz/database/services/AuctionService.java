@@ -7,7 +7,6 @@ import pl.edu.pjwstk.jaz.controllers.requests.AuctionRequest;
 import pl.edu.pjwstk.jaz.controllers.requests.ParameterRequest;
 import pl.edu.pjwstk.jaz.controllers.requests.PhotoRequest;
 import pl.edu.pjwstk.jaz.database.entities.*;
-import pl.edu.pjwstk.jaz.database.repositories.ParameterRepository;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
@@ -18,12 +17,12 @@ import java.util.List;
 public class AuctionService {
 
     private final EntityManager entityManager;
-    private final ParameterRepository parameterRepository;
+    private final ParameterService parameterService;
     private final CategoryService categoryService;
 
-    public AuctionService(EntityManager entityManager, ParameterRepository parameterRepository, CategoryService categoryService) {
+    public AuctionService(EntityManager entityManager, ParameterService parameterService, CategoryService categoryService) {
         this.entityManager = entityManager;
-        this.parameterRepository = parameterRepository;
+        this.parameterService = parameterService;
         this.categoryService = categoryService;
     }
 
@@ -85,8 +84,8 @@ public class AuctionService {
         for(ParameterRequest parameterRequest : parameters){
             AuctionParameter auctionParameter = new AuctionParameter();
 
-            parameterRepository.addParameter(parameterRequest.getKey());
-            Parameter parameter = parameterRepository.findParameterByKey(parameterRequest.getKey());
+            parameterService.addParameter(parameterRequest.getKey());
+            Parameter parameter = parameterService.findParameterByKey(parameterRequest.getKey());
 
             auctionParameter.setAuction(auction);
             auctionParameter.setParameter(parameter);
