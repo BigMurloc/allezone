@@ -1,11 +1,13 @@
 package pl.edu.pjwstk.jaz.controllers;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pjwstk.jaz.controllers.requests.SectionRequest;
 import pl.edu.pjwstk.jaz.database.entities.Section;
 import pl.edu.pjwstk.jaz.database.services.SectionService;
 
 @RestController
+@PreAuthorize("hasAnyAuthority('admin')")
 public class SectionController {
 
     private final SectionService sectionService;
@@ -24,6 +26,11 @@ public class SectionController {
         Section section = sectionService.findSectionById(id);
         section.setName(sectionRequest.getName());
         sectionService.updateSection(section);
+    }
+
+    @DeleteMapping("/section/{name}")
+    public void deleteSection(@PathVariable String name){
+        sectionService.deleteSection(name);
     }
 
 }

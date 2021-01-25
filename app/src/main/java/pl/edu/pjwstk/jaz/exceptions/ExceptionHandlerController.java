@@ -19,6 +19,17 @@ import javax.persistence.NoResultException;
 public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
 
 
+    @ExceptionHandler(value = CategoryAlreadyExists.class)
+    protected ResponseEntity<Object> handleCategoryAlreadyExists(RuntimeException exception, WebRequest request) {
+        String bodyOfResponse = "Category already exists!";
+        return handleExceptionInternal(
+                exception,
+                bodyOfResponse,
+                new HttpHeaders(),
+                HttpStatus.BAD_REQUEST,
+                request
+        );
+    }
 //    @ExceptionHandler(value = ConstraintViolationException.class)
 //    protected ResponseEntity<Object> handleUserAlreadyExistsException(RuntimeException exception, WebRequest request) {
 //        String bodyOfResponse = "User already exists";

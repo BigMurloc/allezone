@@ -1,5 +1,6 @@
 package pl.edu.pjwstk.jaz.database.services;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import pl.edu.pjwstk.jaz.controllers.requests.SectionRequest;
 import pl.edu.pjwstk.jaz.database.entities.Section;
@@ -42,5 +43,11 @@ public class SectionService {
     @Transactional
     public void updateSection(Section section) {
         entityManager.merge(section);
+    }
+
+    @Transactional
+    public void deleteSection(String name){
+        Section section = findSectionByName(name);
+        entityManager.remove(section);
     }
 }

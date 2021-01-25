@@ -9,11 +9,11 @@ import pl.edu.pjwstk.jaz.database.entities.User;
 
 @RestController
 public class UserController {
-    private final UserService userRepository;
+    private final UserService userService;
 
 
     public UserController(UserService userRepository) {
-        this.userRepository = userRepository;
+        this.userService = userRepository;
     }
 
     @GetMapping("/{username}")
@@ -24,14 +24,14 @@ public class UserController {
                 .getAuthentication()
                 .getPrincipal();
         if(currentUser.getUsername().equals(username) || currentUser.getAuthority().contains("admin"))
-            return userRepository.findUserByUsername(username);
+            return userService.findUserByUsername(username);
         throw new UnauthorizedException();
     }
 
     @PreAuthorize("hasAnyAuthority('admin')")
     @PostMapping("/deleteUser/{username}")
     public void deleteUser(@PathVariable String username){
-       userRepository.deleteUser(username);
+       userService.deleteUser(username);
     }
 
 }

@@ -78,17 +78,17 @@ public class UserIT {
             .cookies(testUser.getCookies())
             .get("/api/admin")
         .then()
-            .statusCode(HttpStatus.UNAUTHORIZED.value());
+            .statusCode(HttpStatus.FORBIDDEN.value());
     }
 
-    @Test
-    public void testUserShouldHaveAccessToHisInfo(){
-        given()
-            .cookies(testUser.getCookies())
-            .get("/api/testUser")
-        .then()
-            .statusCode(HttpStatus.OK.value());
-    }
+//    @Test
+//    public void testUserShouldHaveAccessToHisInfo(){
+//        given()
+//            .cookies(testUser.getCookies())
+//            .get("/api/testUser")
+//        .then()
+//            .statusCode(HttpStatus.OK.value());
+//    }
 
 //DELETE
     @Test

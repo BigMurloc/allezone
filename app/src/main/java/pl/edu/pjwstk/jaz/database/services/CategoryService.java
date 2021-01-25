@@ -1,9 +1,12 @@
 package pl.edu.pjwstk.jaz.database.services;
 
+import org.hibernate.exception.ConstraintViolationException;
+import org.postgresql.util.PSQLException;
 import org.springframework.stereotype.Service;
 import pl.edu.pjwstk.jaz.controllers.requests.CategoryRequest;
 import pl.edu.pjwstk.jaz.database.entities.Category;
 import pl.edu.pjwstk.jaz.database.entities.Section;
+import pl.edu.pjwstk.jaz.exceptions.CategoryAlreadyExists;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
@@ -20,12 +23,21 @@ public class CategoryService {
     }
 
     @Transactional
-    public void addCategory(CategoryRequest categoryRequest){
+    public void addCategory(CategoryRequest categoryRequest) throws CategoryAlreadyExists {
+
+        if(findCategoryByName(categoryRequest.getName()) != null){
+            throw new CategoryAlreadyExists();
+        }
         Category category = new Category();
+        category.setName(categoryRequest.getName());
+
         Section section = sectionService.findSectionByName(categoryRequest.getSection());
         category.setSection(section);
-        category.setName(categoryRequest.getName());
-        entityManager.persist(category);
+        try {
+            entityManager.persist(category);
+        } catch (ConstraintViolationException e){
+            System.out.println("oLALALALA");
+        }
     }
 
     @Transactional
@@ -47,5 +59,11 @@ public class CategoryService {
                 .createQuery(query)
                 .setParameter("id", id)
                 .getSingleResult();
+    }
+
+    @Transactional
+    public void deleteCategory(String name) {
+        Category category = findCategoryByName(name);
+        entityManager.remove(category);
     }
 }

@@ -23,7 +23,7 @@ public class AverageIT {
         authorizedUserResponse =
         given()
             .when()
-                .body(new LoginRequest("admin", "admin"))
+                .body(new LoginRequest("user", "user"))
                 .contentType(ContentType.JSON)
                 .post("/api/login")
             .thenReturn();
