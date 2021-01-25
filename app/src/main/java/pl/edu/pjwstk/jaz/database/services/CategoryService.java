@@ -25,7 +25,7 @@ public class CategoryService {
     @Transactional
     public void addCategory(CategoryRequest categoryRequest) throws CategoryAlreadyExists {
 
-        if(findCategoryByName(categoryRequest.getName()) != null){
+        if(doesExistByName(categoryRequest.getName())){
             throw new CategoryAlreadyExists();
         }
         Category category = new Category();
@@ -55,6 +55,15 @@ public class CategoryService {
                 .createQuery(query)
                 .setParameter("id", id)
                 .getSingleResult();
+    }
+
+    public boolean doesExistByName(String name){
+        String query = "SELECT count(c) FROM Category c WHERE c.name =: name";
+        Long count = (Long) entityManager
+                .createQuery(query)
+                .setParameter("name", name)
+                .getSingleResult();
+        return count != 0;
     }
 
     @Transactional

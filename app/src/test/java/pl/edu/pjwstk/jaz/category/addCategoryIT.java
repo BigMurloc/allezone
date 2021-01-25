@@ -14,6 +14,7 @@ import pl.edu.pjwstk.jaz.controllers.requests.LoginRequest;
 import pl.edu.pjwstk.jaz.controllers.requests.RegisterRequest;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 
 @RunWith(SpringRunner.class)
 @IntegrationTest
@@ -31,11 +32,6 @@ public class addCategoryIT {
                 .contentType(ContentType.JSON)
                 .post("/api/login")
                 .thenReturn();
-        given()
-                .when()
-                .body(new RegisterRequest("testUser", "user"))
-                .contentType(ContentType.JSON)
-                .post("/api/register");
         authenticatedUser = given()
                 .when()
                 .body(new LoginRequest("testUser", "user"))
@@ -46,10 +42,6 @@ public class addCategoryIT {
 
     @AfterClass
     public static void tearDown(){
-        given()
-                .cookies(adminResponse.getCookies())
-                .contentType(ContentType.JSON)
-                .post("/api/deleteUser/testUser");
         given()
                 .cookies(adminResponse.getCookies())
                 .contentType(ContentType.JSON)
@@ -108,8 +100,10 @@ public class addCategoryIT {
                 .contentType(ContentType.JSON)
                 .body(categoryRequest)
                 .post("/api/category")
-                .then()
-                .statusCode(HttpStatus.BAD_REQUEST.value());
+        .then()
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+        .and()
+        .content(equalTo("Category already exists!"));
     }
 
 
