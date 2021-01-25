@@ -42,16 +42,16 @@ public class RegisterTest {
     }
 
     @Test
-    public void when_user_already_exists_throw_exception_with_status_code_409_CONFLICT(){
+    public void when_user_already_exists_throw_exception_with_status_code_400(){
         given()
             .when()
             .body(new RegisterRequest("admin", "admin"))
             .contentType(ContentType.JSON)
             .post("/api/register")
         .then()
-            .statusCode(HttpStatus.CONFLICT.value())
+            .statusCode(HttpStatus.BAD_REQUEST.value())
         .and()
-            .content(equalTo("User already exists"));
+            .content(equalTo("User already exists!"));
     }
 
 }

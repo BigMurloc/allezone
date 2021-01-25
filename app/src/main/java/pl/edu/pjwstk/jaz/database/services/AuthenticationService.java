@@ -4,6 +4,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import pl.edu.pjwstk.jaz.controllers.AppAuthentication;
 import pl.edu.pjwstk.jaz.database.entities.User;
+import pl.edu.pjwstk.jaz.exceptions.UserDoesNotExistException;
 
 
 @Component
@@ -15,7 +16,7 @@ public class AuthenticationService {
         this.userService = userService;
     }
 
-    public boolean login(String username, String password) {
+    public boolean login(String username, String password) throws UserDoesNotExistException {
         User user = userService.findUserByUsername(username);
         if (userService.matches(password, user.getPassword())) {
             SecurityContextHolder.getContext().setAuthentication(new AppAuthentication(user));

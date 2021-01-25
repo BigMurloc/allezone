@@ -31,7 +31,7 @@ public class GrantAuthorityTest {
                 .thenReturn();
         given()
                 .when()
-                .body(new RegisterRequest("user", "user"))
+                .body(new RegisterRequest("testUserDB", "user"))
                 .contentType(ContentType.JSON)
                 .post("/api/register");
         given()
@@ -41,7 +41,7 @@ public class GrantAuthorityTest {
                 .post("/api/register");
         authenticatedUser = given()
                 .when()
-                    .body(new LoginRequest("user", "user"))
+                    .body(new LoginRequest("testUser", "user"))
                     .contentType(ContentType.JSON)
                     .post("/api/login")
                 .thenReturn();
@@ -56,7 +56,7 @@ public class GrantAuthorityTest {
         given()
                 .cookies(adminResponse.getCookies())
                 .contentType(ContentType.JSON)
-                .post("/api/deleteUser/user");
+                .post("/api/deleteUser/testUserDB");
 
     }
     @Test
@@ -71,7 +71,7 @@ public class GrantAuthorityTest {
     }
 
     @Test
-    public void authenticated_user_should_not_have_access_to_grant_authority_with_status_code_200_OK(){
+    public void authenticated_user_should_not_have_access_to_grant_authority_with_status_code_403(){
         given()
                 .cookies(authenticatedUser.getCookies())
                 .body(new AuthorityRequest("moderator", "grant-authority"))
@@ -82,7 +82,7 @@ public class GrantAuthorityTest {
     }
 
     @Test
-    public void unauthenticated_user_should_not_have_access_to_grant_authority_with_status_code_200_OK(){
+    public void unauthenticated_user_should_not_have_access_to_grant_authority_with_status_code_403(){
         given()
             .when()
                 .body(new AuthorityRequest("moderator", "grant-authority"))
@@ -108,7 +108,7 @@ public class GrantAuthorityTest {
 
         given()
             .cookies(moderatorResponse.getCookies())
-            .body(new AuthorityRequest("user", "grant-authority"))
+            .body(new AuthorityRequest("testUserDB", "grant-authority"))
             .contentType(ContentType.JSON)
             .post("/api/grant-authority")
         .then()

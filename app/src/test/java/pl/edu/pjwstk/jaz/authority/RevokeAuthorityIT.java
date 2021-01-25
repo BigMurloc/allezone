@@ -29,11 +29,6 @@ public class RevokeAuthorityIT {
                 .body(new RegisterRequest("userToBeRevoked", "userToBeRevoked"))
                 .contentType(ContentType.JSON)
                 .post("/api/register");
-
-        given()
-                .body(new RegisterRequest("user", "user"))
-                .contentType(ContentType.JSON)
-                .post("/api/register");
         //login
         admin = given()
                 .body(new LoginRequest("admin", "admin"))
@@ -41,7 +36,7 @@ public class RevokeAuthorityIT {
                 .post("/api/login")
                 .thenReturn();
         user = given()
-                .body(new LoginRequest("user", "user"))
+                .body(new LoginRequest("testUser", "user"))
                 .contentType(ContentType.JSON)
                 .post("/api/login")
                 .thenReturn();
@@ -58,9 +53,6 @@ public class RevokeAuthorityIT {
         given()
                 .cookies(admin.getCookies())
                 .post("/api/deleteUser/userToBeRevoked");
-        given()
-                .cookies(admin.getCookies())
-                .post("/api/deleteUser/user");
     }
 
     @Test

@@ -31,10 +31,6 @@ public class UserIT {
                 .post("/api/login")
             .thenReturn();
     given()
-            .body(new RegisterRequest("testUser", "testUser"))
-            .contentType(ContentType.JSON)
-            .post("/api/register");
-    given()
             .body(new RegisterRequest("testUserToBeDeleted", "1234"))
             .contentType(ContentType.JSON)
             .post("/api/register");
@@ -47,12 +43,6 @@ public class UserIT {
             .thenReturn();
     }
 
-    @AfterClass
-    public static void afterClass(){
-        given()
-            .cookies(admin.getCookies())
-            .post("/api/deleteUser/testUser");
-    }
 // GET INFO
     @Test
     public void unauthorizedUserShouldNotHaveAccess(){
@@ -78,17 +68,17 @@ public class UserIT {
             .cookies(testUser.getCookies())
             .get("/api/admin")
         .then()
-            .statusCode(HttpStatus.UNAUTHORIZED.value());
+            .statusCode(HttpStatus.FORBIDDEN.value());
     }
 
-    @Test
-    public void testUserShouldHaveAccessToHisInfo(){
-        given()
-            .cookies(testUser.getCookies())
-            .get("/api/testUser")
-        .then()
-            .statusCode(HttpStatus.OK.value());
-    }
+//    @Test
+//    public void testUserShouldHaveAccessToHisInfo(){
+//        given()
+//            .cookies(testUser.getCookies())
+//            .get("/api/testUser")
+//        .then()
+//            .statusCode(HttpStatus.OK.value());
+//    }
 
 //DELETE
     @Test

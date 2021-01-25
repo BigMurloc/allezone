@@ -1,13 +1,16 @@
 package pl.edu.pjwstk.jaz.controllers;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pjwstk.jaz.controllers.requests.CategoryRequest;
 import pl.edu.pjwstk.jaz.database.entities.Category;
 import pl.edu.pjwstk.jaz.database.entities.Section;
 import pl.edu.pjwstk.jaz.database.services.CategoryService;
 import pl.edu.pjwstk.jaz.database.services.SectionService;
+import pl.edu.pjwstk.jaz.exceptions.CategoryAlreadyExistException;
 
 @RestController
+@PreAuthorize("hasAnyAuthority('admin')")
 public class CategoryController {
 
     private final CategoryService categoryService;
@@ -20,7 +23,7 @@ public class CategoryController {
     }
 
     @PostMapping("/category")
-    public void addCategory(@RequestBody CategoryRequest categoryRequest){
+    public void addCategory(@RequestBody CategoryRequest categoryRequest) throws CategoryAlreadyExistException {
         categoryService.addCategory(categoryRequest);
     }
 
@@ -31,6 +34,11 @@ public class CategoryController {
         category.setName(categoryRequest.getName());
         category.setSection(updatedSection);
         categoryService.updateCategory(category);
+    }
+
+    @DeleteMapping("/category/{name}")
+    public void deleteCategory(@PathVariable String name){
+        categoryService.deleteCategory(name);
     }
 
 }

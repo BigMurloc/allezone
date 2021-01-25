@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import pl.edu.pjwstk.jaz.controllers.requests.CategoryRequest;
 import pl.edu.pjwstk.jaz.database.entities.Category;
 import pl.edu.pjwstk.jaz.database.entities.Section;
+import pl.edu.pjwstk.jaz.exceptions.CategoryAlreadyExistException;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
@@ -20,11 +21,16 @@ public class CategoryService {
     }
 
     @Transactional
-    public void addCategory(CategoryRequest categoryRequest){
+    public void addCategory(CategoryRequest categoryRequest) throws CategoryAlreadyExistException {
+
+        if(doesExistByName(categoryRequest.getName())){
+            throw new CategoryAlreadyExistException();
+        }
         Category category = new Category();
+        category.setName(categoryRequest.getName());
+
         Section section = sectionService.findSectionByName(categoryRequest.getSection());
         category.setSection(section);
-        category.setName(categoryRequest.getName());
         entityManager.persist(category);
     }
 
@@ -47,5 +53,20 @@ public class CategoryService {
                 .createQuery(query)
                 .setParameter("id", id)
                 .getSingleResult();
+    }
+
+    public boolean doesExistByName(String name){
+        String query = "SELECT count(c) FROM Category c WHERE c.name =: name";
+        Long count = (Long) entityManager
+                .createQuery(query)
+                .setParameter("name", name)
+                .getSingleResult();
+        return count != 0;
+    }
+
+    @Transactional
+    public void deleteCategory(String name) {
+        Category category = findCategoryByName(name);
+        entityManager.remove(category);
     }
 }

@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 import pl.edu.pjwstk.jaz.controllers.requests.RegisterRequest;
 import pl.edu.pjwstk.jaz.database.entities.User;
 import pl.edu.pjwstk.jaz.controllers.requests.AuthorityRequest;
+import pl.edu.pjwstk.jaz.exceptions.UserAlreadyExistsException;
+import pl.edu.pjwstk.jaz.exceptions.UserDoesNotExistException;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
@@ -21,15 +23,21 @@ public class UserService {
         this.entityManager = entityManager;
     }
 
-    public User findUserByUsername(String username){
+    public User findUserByUsername(String username) throws UserDoesNotExistException {
+        if(!doesExistByName(username)){
+            throw new UserDoesNotExistException();
+        }
         return entityManager.createQuery("select ue from User ue where ue.username = :username", User.class)
                 .setParameter("username", username)
                 .getSingleResult();
     }
 
     @Transactional
-    public void saveUser(RegisterRequest registerRequest) {
+    public void saveUser(RegisterRequest registerRequest) throws UserAlreadyExistsException {
         User user = new User();
+        if(doesExistByName(registerRequest.getUsername())){
+            throw new UserAlreadyExistsException();
+        }
         String hashedPassword = passwordEncoder.encode(registerRequest.getPassword());
         user.setUsername(registerRequest.getUsername());
         user.setPassword(hashedPassword);
@@ -42,13 +50,13 @@ public class UserService {
     }
 
     @Transactional
-    public void deleteUser(String username) {
+    public void deleteUser(String username) throws UserDoesNotExistException {
         User user = findUserByUsername(username);
         entityManager.remove(user);
     }
 
     @Transactional
-    public void grantAuthority(AuthorityRequest authorityRequest){
+    public void grantAuthority(AuthorityRequest authorityRequest) throws UserDoesNotExistException {
         User user = findUserByUsername(authorityRequest.getUsername());
         entityManager.createQuery("SELECT authority FROM Authority authority WHERE authority.authority = :authority")
                 .setParameter("authority", authorityRequest.getAuthority())
@@ -59,7 +67,7 @@ public class UserService {
     }
 
     @Transactional
-    public void revokeAuthority(AuthorityRequest authorityRequest) {
+    public void revokeAuthority(AuthorityRequest authorityRequest) throws UserDoesNotExistException {
         User user = findUserByUsername(authorityRequest.getUsername());
         Set<String> authorities = user.getAuthority();
         authorities.remove(authorityRequest.getAuthority());
@@ -69,4 +77,14 @@ public class UserService {
     public boolean matches(String rawPassword, String hashedPassword){
         return passwordEncoder.matches(rawPassword, hashedPassword);
     }
+
+    public boolean doesExistByName(String username){
+        String query = "SELECT count(u) FROM User u WHERE u.username =: username";
+        Long count = (Long) entityManager
+                .createQuery(query)
+                .setParameter("username", username)
+                .getSingleResult();
+        return count != 0;
+    }
+
 }
