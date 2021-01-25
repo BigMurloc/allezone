@@ -12,9 +12,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
 
 
-    @ExceptionHandler(value = CategoryAlreadyExistsException.class)
+    @ExceptionHandler(value = CategoryAlreadyExistException.class)
     protected ResponseEntity<Object> handleCategoryAlreadyExists(RuntimeException exception, WebRequest request) {
-        String bodyOfResponse = "Category already exist!";
+        String bodyOfResponse = "Category already exists!";
         return handleExceptionInternal(
                 exception,
                 bodyOfResponse,
@@ -24,9 +24,9 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
         );
     }
 
-    @ExceptionHandler(value = SectionAlreadyExistsException.class)
+    @ExceptionHandler(value = SectionAlreadyExistException.class)
     protected ResponseEntity<Object> handleSectionAlreadyExists(RuntimeException exception, WebRequest request) {
-        String bodyOfResponse = "Section already exist!";
+        String bodyOfResponse = "Section already exists!";
         return handleExceptionInternal(
                 exception,
                 bodyOfResponse,
@@ -58,4 +58,16 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
                 HttpStatus.UNAUTHORIZED,
                 request);
     }
+
+    @ExceptionHandler(value = UserAlreadyExistsException.class)
+    protected ResponseEntity<Object> handleUserAlreadyExistException(RuntimeException exception, WebRequest request) {
+        String bodyOfResponse = "User already exists";
+        return handleExceptionInternal(
+                exception,
+                bodyOfResponse,
+                new HttpHeaders(),
+                HttpStatus.UNAUTHORIZED,
+                request);
+    }
+
 }

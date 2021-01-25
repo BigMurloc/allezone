@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import pl.edu.pjwstk.jaz.controllers.requests.RegisterRequest;
 import pl.edu.pjwstk.jaz.database.entities.User;
 import pl.edu.pjwstk.jaz.controllers.requests.AuthorityRequest;
+import pl.edu.pjwstk.jaz.exceptions.UserAlreadyExistsException;
 import pl.edu.pjwstk.jaz.exceptions.UserDoesNotExistException;
 
 import javax.persistence.EntityManager;
@@ -32,8 +33,11 @@ public class UserService {
     }
 
     @Transactional
-    public void saveUser(RegisterRequest registerRequest) {
+    public void saveUser(RegisterRequest registerRequest) throws UserAlreadyExistsException {
         User user = new User();
+        if(doesExistByName(registerRequest.getUsername())){
+            throw new UserAlreadyExistsException();
+        }
         String hashedPassword = passwordEncoder.encode(registerRequest.getPassword());
         user.setUsername(registerRequest.getUsername());
         user.setPassword(hashedPassword);

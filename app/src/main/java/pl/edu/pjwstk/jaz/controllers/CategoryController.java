@@ -7,7 +7,7 @@ import pl.edu.pjwstk.jaz.database.entities.Category;
 import pl.edu.pjwstk.jaz.database.entities.Section;
 import pl.edu.pjwstk.jaz.database.services.CategoryService;
 import pl.edu.pjwstk.jaz.database.services.SectionService;
-import pl.edu.pjwstk.jaz.exceptions.CategoryAlreadyExistsException;
+import pl.edu.pjwstk.jaz.exceptions.CategoryAlreadyExistException;
 
 @RestController
 @PreAuthorize("hasAnyAuthority('admin')")
@@ -23,7 +23,7 @@ public class CategoryController {
     }
 
     @PostMapping("/category")
-    public void addCategory(@RequestBody CategoryRequest categoryRequest) throws CategoryAlreadyExistsException {
+    public void addCategory(@RequestBody CategoryRequest categoryRequest) throws CategoryAlreadyExistException {
         categoryService.addCategory(categoryRequest);
     }
 

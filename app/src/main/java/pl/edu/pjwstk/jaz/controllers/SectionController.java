@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.edu.pjwstk.jaz.controllers.requests.SectionRequest;
 import pl.edu.pjwstk.jaz.database.entities.Section;
 import pl.edu.pjwstk.jaz.database.services.SectionService;
-import pl.edu.pjwstk.jaz.exceptions.SectionAlreadyExistsException;
+import pl.edu.pjwstk.jaz.exceptions.SectionAlreadyExistException;
 
 @RestController
 @PreAuthorize("hasAnyAuthority('admin')")
@@ -18,7 +18,7 @@ public class SectionController {
     }
 
     @PostMapping("/section")
-    public void addSection(@RequestBody SectionRequest sectionRequest) throws SectionAlreadyExistsException {
+    public void addSection(@RequestBody SectionRequest sectionRequest) throws SectionAlreadyExistException {
         sectionService.addSection(sectionRequest);
     }
 

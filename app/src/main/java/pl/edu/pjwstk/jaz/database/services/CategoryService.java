@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import pl.edu.pjwstk.jaz.controllers.requests.CategoryRequest;
 import pl.edu.pjwstk.jaz.database.entities.Category;
 import pl.edu.pjwstk.jaz.database.entities.Section;
-import pl.edu.pjwstk.jaz.exceptions.CategoryAlreadyExistsException;
+import pl.edu.pjwstk.jaz.exceptions.CategoryAlreadyExistException;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
@@ -21,10 +21,10 @@ public class CategoryService {
     }
 
     @Transactional
-    public void addCategory(CategoryRequest categoryRequest) throws CategoryAlreadyExistsException {
+    public void addCategory(CategoryRequest categoryRequest) throws CategoryAlreadyExistException {
 
         if(doesExistByName(categoryRequest.getName())){
-            throw new CategoryAlreadyExistsException();
+            throw new CategoryAlreadyExistException();
         }
         Category category = new Category();
         category.setName(categoryRequest.getName());
