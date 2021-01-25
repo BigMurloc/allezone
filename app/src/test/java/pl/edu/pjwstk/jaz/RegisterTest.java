@@ -42,14 +42,14 @@ public class RegisterTest {
     }
 
     @Test
-    public void when_user_already_exists_throw_exception_with_status_code_500(){
+    public void when_user_already_exists_throw_exception_with_status_code_400(){
         given()
             .when()
             .body(new RegisterRequest("admin", "admin"))
             .contentType(ContentType.JSON)
             .post("/api/register")
         .then()
-            .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+            .statusCode(HttpStatus.BAD_REQUEST.value());
     }
 
 }

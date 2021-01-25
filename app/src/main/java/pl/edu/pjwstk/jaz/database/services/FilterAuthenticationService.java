@@ -3,6 +3,7 @@ package pl.edu.pjwstk.jaz.database.services;
 import org.springframework.stereotype.Component;
 import pl.edu.pjwstk.jaz.deprecated.User;
 import pl.edu.pjwstk.jaz.deprecated.UserDB;
+import pl.edu.pjwstk.jaz.exceptions.UserDoesNotExistException;
 import pl.edu.pjwstk.jaz.filter.UserSession;
 
 
@@ -18,8 +19,11 @@ public class FilterAuthenticationService {
         this.userSession = userSession;
     }
 
-    public boolean login(String username, String password) {
+    public boolean login(String username, String password) throws UserDoesNotExistException {
         user = userDB.getUser(username);
+        if(user == null){
+            throw new UserDoesNotExistException();
+        }
         if(user != null && user.getPassword().equals(password)){
             userSession.logIn();
             return true;

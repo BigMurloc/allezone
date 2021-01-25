@@ -1,8 +1,5 @@
 package pl.edu.pjwstk.jaz.exceptions;
 
-import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
-import org.hibernate.exception.ConstraintViolationException;
-import org.postgresql.util.PSQLException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,16 +7,12 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import pl.edu.pjwstk.jaz.exceptions.UnauthorizedException;
-import pl.edu.pjwstk.jaz.exceptions.UserAlreadyExistsException;
-
-import javax.persistence.NoResultException;
 
 @ControllerAdvice
 public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
 
 
-    @ExceptionHandler(value = CategoryAlreadyExists.class)
+    @ExceptionHandler(value = CategoryAlreadyExistsException.class)
     protected ResponseEntity<Object> handleCategoryAlreadyExists(RuntimeException exception, WebRequest request) {
         String bodyOfResponse = "Category already exist!";
         return handleExceptionInternal(
@@ -31,7 +24,7 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
         );
     }
 
-    @ExceptionHandler(value = SectionAlreadyExists.class)
+    @ExceptionHandler(value = SectionAlreadyExistsException.class)
     protected ResponseEntity<Object> handleSectionAlreadyExists(RuntimeException exception, WebRequest request) {
         String bodyOfResponse = "Section already exist!";
         return handleExceptionInternal(
@@ -43,7 +36,7 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
         );
     }
 
-    @ExceptionHandler(value = UserDoesNotExist.class)
+    @ExceptionHandler(value = UserDoesNotExistException.class)
     protected ResponseEntity<Object> handleUserDoesNotExists(RuntimeException exception, WebRequest request) {
         String bodyOfResponse = "User does not exist!";
         return handleExceptionInternal(
@@ -55,37 +48,14 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
         );
     }
 
-
-//    @ExceptionHandler(value = ConstraintViolationException.class)
-//    protected ResponseEntity<Object> handleUserAlreadyExistsException(RuntimeException exception, WebRequest request) {
-//        String bodyOfResponse = "User already exists";
-//        return handleExceptionInternal(
-//                exception,
-//                bodyOfResponse,
-//                new HttpHeaders(),
-//                HttpStatus.CONFLICT,
-//                request);
-//    }
-//
-//    @ExceptionHandler(value = NoResultException.class)
-//    protected ResponseEntity<Object> handleNoResultException(RuntimeException exception, WebRequest request) {
-//        String bodyOfResponse = "User does not exist";
-//        return handleExceptionInternal(
-//                exception,
-//                bodyOfResponse,
-//                new HttpHeaders(),
-//                HttpStatus.CONFLICT,
-//                request);
-//    }
-//
-//    @ExceptionHandler(value = UnauthorizedException.class)
-//    protected ResponseEntity<Object> handleUnauthorizedException(RuntimeException exception, WebRequest request) {
-//        String bodyOfResponse = "";
-//        return handleExceptionInternal(
-//                exception,
-//                bodyOfResponse,
-//                new HttpHeaders(),
-//                HttpStatus.UNAUTHORIZED,
-//                request);
-//    }
+    @ExceptionHandler(value = UnauthorizedException.class)
+    protected ResponseEntity<Object> handleUnauthorizedException(RuntimeException exception, WebRequest request) {
+        String bodyOfResponse = "";
+        return handleExceptionInternal(
+                exception,
+                bodyOfResponse,
+                new HttpHeaders(),
+                HttpStatus.UNAUTHORIZED,
+                request);
+    }
 }

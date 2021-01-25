@@ -1,12 +1,10 @@
 package pl.edu.pjwstk.jaz.database.services;
 
-import org.hibernate.exception.ConstraintViolationException;
-import org.postgresql.util.PSQLException;
 import org.springframework.stereotype.Service;
 import pl.edu.pjwstk.jaz.controllers.requests.CategoryRequest;
 import pl.edu.pjwstk.jaz.database.entities.Category;
 import pl.edu.pjwstk.jaz.database.entities.Section;
-import pl.edu.pjwstk.jaz.exceptions.CategoryAlreadyExists;
+import pl.edu.pjwstk.jaz.exceptions.CategoryAlreadyExistsException;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
@@ -23,10 +21,10 @@ public class CategoryService {
     }
 
     @Transactional
-    public void addCategory(CategoryRequest categoryRequest) throws CategoryAlreadyExists {
+    public void addCategory(CategoryRequest categoryRequest) throws CategoryAlreadyExistsException {
 
         if(doesExistByName(categoryRequest.getName())){
-            throw new CategoryAlreadyExists();
+            throw new CategoryAlreadyExistsException();
         }
         Category category = new Category();
         category.setName(categoryRequest.getName());

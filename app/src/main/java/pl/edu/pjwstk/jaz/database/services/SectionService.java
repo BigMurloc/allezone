@@ -3,7 +3,7 @@ package pl.edu.pjwstk.jaz.database.services;
 import org.springframework.stereotype.Service;
 import pl.edu.pjwstk.jaz.controllers.requests.SectionRequest;
 import pl.edu.pjwstk.jaz.database.entities.Section;
-import pl.edu.pjwstk.jaz.exceptions.SectionAlreadyExists;
+import pl.edu.pjwstk.jaz.exceptions.SectionAlreadyExistsException;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
@@ -18,11 +18,11 @@ public class SectionService {
     }
 
     @Transactional
-    public void addSection(SectionRequest sectionRequest) throws SectionAlreadyExists {
+    public void addSection(SectionRequest sectionRequest) throws SectionAlreadyExistsException {
         Section section = new Section();
         section.setName(sectionRequest.getName());
         if(doesExistByName(sectionRequest.getName())){
-            throw new SectionAlreadyExists();
+            throw new SectionAlreadyExistsException();
         }
         entityManager.persist(section);
     }
