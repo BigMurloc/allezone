@@ -14,6 +14,7 @@ import pl.edu.pjwstk.jaz.controllers.requests.RegisterRequest;
 import pl.edu.pjwstk.jaz.controllers.requests.SectionRequest;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 
 @RunWith(SpringRunner.class)
 @IntegrationTest
@@ -31,11 +32,6 @@ public class addSectionIT {
                 .contentType(ContentType.JSON)
                 .post("/api/login")
                 .thenReturn();
-        given()
-                .when()
-                .body(new RegisterRequest("testUser", "user"))
-                .contentType(ContentType.JSON)
-                .post("/api/register");
         authenticatedUser = given()
                 .when()
                 .body(new LoginRequest("testUser", "user"))
@@ -49,17 +45,13 @@ public class addSectionIT {
         given()
                 .cookies(adminResponse.getCookies())
                 .contentType(ContentType.JSON)
-                .post("/api/deleteUser/testUser");
-        given()
-                .cookies(adminResponse.getCookies())
-                .contentType(ContentType.JSON)
-                .delete("/api/section/testSection");
+                .delete("/api/section/testSectionToBeDeleted");
     }
 
     @Test
     public void admin_should_be_able_to_create_section_200(){
         SectionRequest sectionRequest = new SectionRequest();
-        sectionRequest.setName("testSection");
+        sectionRequest.setName("testSectionToBeDeleted");
         given()
                 .cookies(adminResponse.getCookies())
                 .contentType(ContentType.JSON)
@@ -96,7 +88,7 @@ public class addSectionIT {
     }
 
     @Test
-    public void adding_section_that_already_exists_should_throw_exception_500(){
+    public void adding_section_that_already_exists_should_throw_exception_400(){
         SectionRequest sectionRequest = new SectionRequest();
         sectionRequest.setName("testSection");
         given()
@@ -105,9 +97,9 @@ public class addSectionIT {
                 .body(sectionRequest)
                 .post("/api/section")
                 .then()
-                .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
-
-
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .and()
+                .content(equalTo("Section already exists!"));
     }
 
 

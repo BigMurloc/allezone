@@ -1,9 +1,9 @@
 package pl.edu.pjwstk.jaz.database.services;
 
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import pl.edu.pjwstk.jaz.controllers.requests.SectionRequest;
 import pl.edu.pjwstk.jaz.database.entities.Section;
+import pl.edu.pjwstk.jaz.exceptions.SectionAlreadyExists;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
@@ -18,10 +18,23 @@ public class SectionService {
     }
 
     @Transactional
-    public void addSection(SectionRequest sectionRequest){
+    public void addSection(SectionRequest sectionRequest) throws SectionAlreadyExists {
         Section section = new Section();
         section.setName(sectionRequest.getName());
+        if(doesExistByName(sectionRequest.getName())){
+            throw new SectionAlreadyExists();
+        }
         entityManager.persist(section);
+    }
+
+    private boolean doesExistByName(String name) {
+        String query = "SELECT count(s) FROM Section s WHERE s.name =: name";
+        Long count = (Long) entityManager
+                .createQuery(query)
+                .setParameter("name", name)
+                .getSingleResult();
+
+        return count != 0;
     }
 
     public Section findSectionById(Long id){

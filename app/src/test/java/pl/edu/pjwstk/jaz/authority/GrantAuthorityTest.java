@@ -31,11 +31,6 @@ public class GrantAuthorityTest {
                 .thenReturn();
         given()
                 .when()
-                .body(new RegisterRequest("testUser", "user"))
-                .contentType(ContentType.JSON)
-                .post("/api/register");
-        given()
-                .when()
                 .body(new RegisterRequest("testUserDB", "user"))
                 .contentType(ContentType.JSON)
                 .post("/api/register");
@@ -58,10 +53,6 @@ public class GrantAuthorityTest {
                 .cookies(adminResponse.getCookies())
                 .contentType(ContentType.JSON)
                 .post("/api/deleteUser/moderator");
-        given()
-                .cookies(adminResponse.getCookies())
-                .contentType(ContentType.JSON)
-                .post("/api/deleteUser/testUser");
         given()
                 .cookies(adminResponse.getCookies())
                 .contentType(ContentType.JSON)

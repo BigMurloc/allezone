@@ -30,6 +30,18 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
                 request
         );
     }
+
+    @ExceptionHandler(value = SectionAlreadyExists.class)
+    protected ResponseEntity<Object> handleSectionAlreadyExists(RuntimeException exception, WebRequest request) {
+        String bodyOfResponse = "Section already exists!";
+        return handleExceptionInternal(
+                exception,
+                bodyOfResponse,
+                new HttpHeaders(),
+                HttpStatus.BAD_REQUEST,
+                request
+        );
+    }
 //    @ExceptionHandler(value = ConstraintViolationException.class)
 //    protected ResponseEntity<Object> handleUserAlreadyExistsException(RuntimeException exception, WebRequest request) {
 //        String bodyOfResponse = "User already exists";
