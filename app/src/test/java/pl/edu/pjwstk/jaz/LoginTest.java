@@ -9,6 +9,7 @@ import pl.edu.pjwstk.jaz.controllers.requests.LoginRequest;
 
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 
 @RunWith(SpringRunner.class)
 @IntegrationTest
@@ -26,36 +27,27 @@ public class LoginTest {
     }
 
     @Test
-    public void when_incorrect_credentials_should_not_login_with_status_code_500(){
+    public void when_user_does_not_exist_with_status_code_400(){
         given()
             .when()
                 .body(new LoginRequest(":XO:", ":XO:"))
                 .contentType(ContentType.JSON)
                 .post("/api/login")
             .then()
-                .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+            .and()
+                .content(equalTo("User does not exist!"));
     }
 
     @Test
-    public void when_incorrect_password_should_not_login_with_status_code_500(){
+    public void when_incorrect_password_should_not_login_with_status_code_400(){
         given()
             .when()
                 .body(new LoginRequest("admin", "wrongPassword"))
                 .contentType(ContentType.JSON)
                 .post("api/login")
             .then()
-                .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
-    }
-
-    @Test
-    public void when_incorrect_username_should_not_login_with_status_code_500(){
-        given()
-                .when()
-                .body(new LoginRequest(":O:O", "admin"))
-                .contentType(ContentType.JSON)
-                .post("api/login")
-                .then()
-                .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+                .statusCode(HttpStatus.UNAUTHORIZED.value());
     }
 
     @Test
@@ -87,36 +79,26 @@ public class LoginTest {
     }
 
     @Test
-    public void AUTH0_when_incorrect_credentials_should_not_login_with_status_code_500(){
+    public void AUTH0_when_user_does_not_exist_with_status_code_400(){
         given()
                 .when()
                 .body(new LoginRequest(":XO:", ":XO:"))
                 .contentType(ContentType.JSON)
                 .post("/api/auth0/login")
                 .then()
-                .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+                .statusCode(HttpStatus.BAD_REQUEST.value());
     }
     @Test
-    public void AUTH0when_incorrect_password_should_not_login_with_status_code_500(){
+    public void AUTH0when_incorrect_password_should_not_login_with_status_code_400(){
         given()
                 .when()
                 .body(new LoginRequest("admin", "wrongPassword"))
                 .contentType(ContentType.JSON)
                 .post("api/auth0/login")
                 .then()
-                .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+                .statusCode(HttpStatus.UNAUTHORIZED.value());
     }
 
-    @Test
-    public void AUTH0when_incorrect_username_should_not_login_with_status_code_500(){
-        given()
-                .when()
-                .body(new LoginRequest(":O:O", "admin"))
-                .contentType(ContentType.JSON)
-                .post("api/auth0/login")
-                .then()
-                .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
-    }
     @Test
     public void AUTHO_when_correct_credentials_should_give_access_to_readiness_endpoint(){
         var response = given()
