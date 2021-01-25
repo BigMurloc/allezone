@@ -21,7 +21,7 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = CategoryAlreadyExists.class)
     protected ResponseEntity<Object> handleCategoryAlreadyExists(RuntimeException exception, WebRequest request) {
-        String bodyOfResponse = "Category already exists!";
+        String bodyOfResponse = "Category already exist!";
         return handleExceptionInternal(
                 exception,
                 bodyOfResponse,
@@ -33,7 +33,7 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = SectionAlreadyExists.class)
     protected ResponseEntity<Object> handleSectionAlreadyExists(RuntimeException exception, WebRequest request) {
-        String bodyOfResponse = "Section already exists!";
+        String bodyOfResponse = "Section already exist!";
         return handleExceptionInternal(
                 exception,
                 bodyOfResponse,
@@ -42,6 +42,20 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
                 request
         );
     }
+
+    @ExceptionHandler(value = UserDoesNotExist.class)
+    protected ResponseEntity<Object> handleUserDoesNotExists(RuntimeException exception, WebRequest request) {
+        String bodyOfResponse = "User does not exist!";
+        return handleExceptionInternal(
+                exception,
+                bodyOfResponse,
+                new HttpHeaders(),
+                HttpStatus.BAD_REQUEST,
+                request
+        );
+    }
+
+
 //    @ExceptionHandler(value = ConstraintViolationException.class)
 //    protected ResponseEntity<Object> handleUserAlreadyExistsException(RuntimeException exception, WebRequest request) {
 //        String bodyOfResponse = "User already exists";
