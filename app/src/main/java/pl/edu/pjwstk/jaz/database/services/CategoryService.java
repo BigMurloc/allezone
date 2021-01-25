@@ -33,11 +33,7 @@ public class CategoryService {
 
         Section section = sectionService.findSectionByName(categoryRequest.getSection());
         category.setSection(section);
-        try {
-            entityManager.persist(category);
-        } catch (ConstraintViolationException e){
-            System.out.println("oLALALALA");
-        }
+        entityManager.persist(category);
     }
 
     @Transactional
