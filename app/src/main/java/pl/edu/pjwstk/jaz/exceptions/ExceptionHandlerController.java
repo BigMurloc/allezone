@@ -61,12 +61,12 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = UserAlreadyExistsException.class)
     protected ResponseEntity<Object> handleUserAlreadyExistException(RuntimeException exception, WebRequest request) {
-        String bodyOfResponse = "User already exists";
+        String bodyOfResponse = "User already exists!";
         return handleExceptionInternal(
                 exception,
                 bodyOfResponse,
                 new HttpHeaders(),
-                HttpStatus.UNAUTHORIZED,
+                HttpStatus.BAD_REQUEST,
                 request);
     }
 

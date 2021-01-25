@@ -49,7 +49,9 @@ public class RegisterTest {
             .contentType(ContentType.JSON)
             .post("/api/register")
         .then()
-            .statusCode(HttpStatus.BAD_REQUEST.value());
+            .statusCode(HttpStatus.BAD_REQUEST.value())
+        .and()
+            .content(equalTo("User already exists!"));
     }
 
 }

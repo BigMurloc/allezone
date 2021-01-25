@@ -75,7 +75,9 @@ public class LoginTest {
                 .contentType(ContentType.JSON)
                 .post("/api/auth0/login")
                 .then()
-                .statusCode(HttpStatus.BAD_REQUEST.value());
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .and()
+                .content(equalTo(""));
     }
 
     @Test
@@ -86,7 +88,9 @@ public class LoginTest {
                 .contentType(ContentType.JSON)
                 .post("/api/auth0/login")
                 .then()
-                .statusCode(HttpStatus.BAD_REQUEST.value());
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .and()
+                .content(equalTo("User does not exist!"));
     }
     @Test
     public void AUTH0when_incorrect_password_should_not_login_with_status_code_400(){
