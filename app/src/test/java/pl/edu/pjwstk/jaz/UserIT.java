@@ -31,10 +31,6 @@ public class UserIT {
                 .post("/api/login")
             .thenReturn();
     given()
-            .body(new RegisterRequest("testUser", "testUser"))
-            .contentType(ContentType.JSON)
-            .post("/api/register");
-    given()
             .body(new RegisterRequest("testUserToBeDeleted", "1234"))
             .contentType(ContentType.JSON)
             .post("/api/register");
@@ -47,12 +43,6 @@ public class UserIT {
             .thenReturn();
     }
 
-    @AfterClass
-    public static void afterClass(){
-        given()
-            .cookies(admin.getCookies())
-            .post("/api/deleteUser/testUser");
-    }
 // GET INFO
     @Test
     public void unauthorizedUserShouldNotHaveAccess(){

@@ -31,11 +31,6 @@ public class editSectionIT {
                 .contentType(ContentType.JSON)
                 .post("/api/login")
                 .thenReturn();
-        given()
-                .when()
-                .body(new RegisterRequest("testUser", "user"))
-                .contentType(ContentType.JSON)
-                .post("/api/register");
         authenticatedUser = given()
                 .when()
                 .body(new LoginRequest("testUser", "user"))
